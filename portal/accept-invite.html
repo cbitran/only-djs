@@ -9,21 +9,24 @@
 </head>
 <body>
   <main class="portal">
-    <header class="topbar">
-      <a class="brand" href="../index.html">ONLY<span>DJs</span></a>
+    <header class="topbar accept-invite-topbar">
+      <a class="accept-invite-brand" href="../index.html" aria-label="ONLY DJAYZ — início"><img src="../assets/logo.png" alt="ONLY DJAYZ"></a>
       <a class="mono" href="login.html">ACESSO ↗</a>
     </header>
-    <section class="frame accept-invite-card">
-      <div class="eyebrow mono" id="flow-label">ACESSO À ESCOLA</div>
-      <h1>DEFINA SUA<br><em>SENHA.</em></h1>
-      <p class="lede">Crie uma senha para entrar na sua área e acompanhar sua formação.</p>
-      <form class="card" id="password-form">
-        <label class="field"><span class="mono">NOVA SENHA</span><input name="password" type="password" autocomplete="new-password" minlength="10" required></label>
-        <label class="field"><span class="mono">REPITA A SENHA</span><input name="confirmPassword" type="password" autocomplete="new-password" minlength="10" required></label>
-        <button class="action mono" type="submit"><span>CONTINUAR</span><span>→</span></button>
-        <button class="text-button mono" id="retry-activation" type="button" hidden>TENTAR ATIVAÇÃO NOVAMENTE</button>
-        <p class="auth-status" id="password-status" role="status" aria-live="polite">Validando seu link…</p>
-      </form>
+    <section class="accept-invite-layout">
+      <figure class="accept-invite-visual"><img src="../assets/dj-female-flx4-wall-profile.jpg" alt="DJ agachada ao lado da cabine, da landing page Only DJAYZ"></figure>
+      <div class="accept-invite-card">
+        <div class="eyebrow mono" id="flow-label">ACESSO À SUA ÁREA</div>
+        <h1>DEFINA SUA<br><em>SENHA.</em></h1>
+        <p class="lede">Crie uma senha para entrar na sua área e acompanhar sua formação.</p>
+        <form class="card" id="password-form">
+          <label class="field"><span class="mono">NOVA SENHA</span><input name="password" type="password" autocomplete="new-password" minlength="10" required></label>
+          <label class="field"><span class="mono">REPITA A SENHA</span><input name="confirmPassword" type="password" autocomplete="new-password" minlength="10" required></label>
+          <button class="action mono" type="submit"><span>CRIAR SENHA E CONTINUAR</span><span>→</span></button>
+          <button class="text-button mono" id="retry-activation" type="button" hidden>TENTAR ATIVAÇÃO NOVAMENTE</button>
+          <p class="auth-status" id="password-status" role="status" aria-live="polite">Validando seu link…</p>
+        </form>
+      </div>
     </section>
   </main>
   <script src="supabase-config.js"></script>
