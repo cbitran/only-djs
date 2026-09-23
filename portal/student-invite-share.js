@@ -7,8 +7,11 @@ function validatePublicUrl(url) {
   return parsed.toString();
 }
 
-export function getStudentInvitationUrl(origin, hostname) {
-  const path = LOCAL_HOSTS.has(String(hostname).toLowerCase()) ? LOCAL_LANDING_PATH : '/';
+export function getStudentInvitationUrl(origin, hostname, pathname = '/') {
+  const local = LOCAL_HOSTS.has(String(hostname).toLowerCase());
+  const portalIndex = String(pathname).indexOf('/portal/');
+  const publicPath = portalIndex >= 0 ? `${String(pathname).slice(0, portalIndex)}/` : '/';
+  const path = local ? LOCAL_LANDING_PATH : publicPath;
   return new URL(path, origin).toString();
 }
 

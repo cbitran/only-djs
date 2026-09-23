@@ -336,7 +336,7 @@ import { lessonCompletionControlMarkup } from './lesson-completion-control.js';
     }
   }
   $('#invite-button').addEventListener('click', () => {
-    $('#invite-link').value = getStudentInvitationUrl(window.location.origin, window.location.hostname);
+    $('#invite-link').value = getStudentInvitationUrl(window.location.origin, window.location.hostname, window.location.pathname);
     $('#invite-dialog').showModal();
   });
   $('#sidebar-toggle').addEventListener('click', event => {
