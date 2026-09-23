@@ -7,6 +7,17 @@ export async function activatePendingInvite(invokeActivation) {
   }
 }
 
+export async function verifyInviteToken(searchParams, verifyOtp) {
+  const tokenHash = searchParams.get('token_hash');
+  if (!tokenHash || searchParams.get('type') !== 'invite') return 'not-invite';
+  try {
+    const { error } = await verifyOtp({ token_hash: tokenHash, type: 'invite' });
+    return error ? 'invalid' : 'verified';
+  } catch {
+    return 'invalid';
+  }
+}
+
 export async function completeInvitePassword(updatePassword, invokeActivation, checkIsAdmin) {
   try {
     const { error } = await updatePassword();
