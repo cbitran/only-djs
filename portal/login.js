@@ -60,7 +60,7 @@ recoveryButton.addEventListener("click", async () => {
     const result = await requestPasswordRecovery(
       supabase,
       email,
-      `${location.origin}/portal/accept-invite.html?flow=recovery`,
+      new URL("accept-invite.html?flow=recovery", location.href).href,
     );
     announce(result === "sent"
       ? "Se esse e-mail estiver cadastrado, você receberá as instruções de recuperação."
