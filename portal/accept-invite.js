@@ -5,6 +5,16 @@ const form = document.querySelector("#password-form");
 const status = document.querySelector("#password-status");
 const button = form.querySelector("button[type=submit]");
 const retryButton = document.querySelector("#retry-activation");
+document.querySelectorAll(".password-toggle").forEach((toggle) => {
+  toggle.addEventListener("click", () => {
+    const input = toggle.closest(".password-control")?.querySelector("input");
+    if (!input) return;
+    const visible = input.type === "password";
+    input.type = visible ? "text" : "password";
+    toggle.setAttribute("aria-pressed", String(visible));
+    toggle.setAttribute("aria-label", `${visible ? "Ocultar" : "Exibir"} ${input.name === "password" ? "nova senha" : "confirmação da senha"}`);
+  });
+});
 const searchParams = new URLSearchParams(location.search);
 const isRecovery = searchParams.get("flow") === "recovery";
 document.querySelector("#flow-label").textContent = isRecovery ? "RECUPERAÇÃO DE ACESSO" : "ACESSO À SUA ÁREA";

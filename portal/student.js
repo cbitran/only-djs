@@ -6,17 +6,19 @@ import { submitConnectedQuiz } from './student-quiz-actions.js';
 import { saveStudentProgress } from './student-account-actions.js';
 import { copyStudentInvitation, getStudentInvitationUrl, shareStudentInvitation } from './student-invite-share.js';
 import { renderSourceList, safeHttpUrl } from './content-url.js';
-import { createNavigationPreferences, selectResumeChapter } from './student-navigation-state.js';
+import { createNavigationPreferences, selectResumeChapter } from './student-navigation-state.js?v=20260923-layout2';
 import { createStudentProfileService } from './student-profile-service.js';
 import { createQuizStepper } from './quiz-stepper.js';
 import { CHAPTER_SECTION_KEYS, chapterProgressPercent, recordChapterSection } from './chapter-progress.js';
 import { lessonCompletionControlMarkup } from './lesson-completion-control.js';
+import { mountBpmExercise } from './bpm-exercise.js?v=20260923-sync19';
+import { mountJogExercise } from './jog-exercise.js?v=20260923-jog8';
 
 (() => {
   const localPreviewMode = isLocalStudentPreviewMode(window.location.hostname, window.location.search);
   const activeSupabase = localPreviewMode ? null : supabase;
   const activeSupabaseConfigured = !localPreviewMode && supabaseConfigured;
-  const ui = { chapters: [], current: 0, tab: 'entenda', completed: new Set(), started: new Set(), completedSections: new Map(), score: 0, answered: new Set(), quizScores: new Map(), avatarUrl: null, avatarPath: null, userId: null };
+  const ui = { chapters: [], current: 0, tab: 'entenda', completed: new Set(), started: new Set(), completedSections: new Map(), score: 0, answered: new Set(), exerciseLogs: [], quizScores: new Map(), avatarUrl: null, avatarPath: null, userId: null };
   const quizFlows = new Map();
   let previewStore = null;
   const avatarStore = !activeSupabaseConfigured ? createStudentAvatarStore() : null;
@@ -25,6 +27,7 @@ import { lessonCompletionControlMarkup } from './lesson-completion-control.js';
   let resumeIndex = 0;
   let hasResumeHistory = false;
   let connectedProgress = [];
+  let activeExerciseCleanup = () => {};
   let navigationPreferences;
   if (!activeSupabaseConfigured) {
     try { previewStore = createStudentPreviewStore(window.localStorage); }
@@ -37,6 +40,7 @@ import { lessonCompletionControlMarkup } from './lesson-completion-control.js';
     ui.completedSections = new Map(Object.entries(savedPreview.chapterSections).map(([index, sections]) => [Number(index), sections]));
     ui.score = savedPreview.score;
     ui.answered = new Set(savedPreview.answered);
+    ui.exerciseLogs = savedPreview.exerciseLogs || [];
   }
   try { navigationPreferences = createNavigationPreferences(window.localStorage); }
   catch { navigationPreferences = createNavigationPreferences(null); }
@@ -107,9 +111,21 @@ import { lessonCompletionControlMarkup } from './lesson-completion-control.js';
     };
   }
   const chapterHours = chapter => ((chapter.theoryMinutes || 0) + (chapter.practiceMinutes || 0)) / 60;
-  function showToast(message) {
+  function showToast(message, anchor = null) {
     const toast = $('#preview-toast');
     toast.textContent = message;
+    toast.style.left = '';
+    toast.style.top = '';
+    toast.style.right = '';
+    toast.style.bottom = '';
+    if (anchor) {
+      const rect = anchor.getBoundingClientRect();
+      const width = Math.min(360, window.innerWidth - 32);
+      toast.style.left = `${Math.max(16, Math.min(window.innerWidth - width - 16, rect.left))}px`;
+      toast.style.top = `${Math.min(window.innerHeight - 70, Math.max(16, rect.bottom + 12))}px`;
+      toast.style.right = 'auto';
+      toast.style.bottom = 'auto';
+    }
     toast.classList.add('show');
     clearTimeout(showToast.timer);
     showToast.timer = setTimeout(() => toast.classList.remove('show'), 4200);
@@ -150,7 +166,13 @@ import { lessonCompletionControlMarkup } from './lesson-completion-control.js';
     if (key === 'fontes') return renderSourceList(data);
     const title = data.title || ({ entenda: 'A ideia principal', veja: 'Observe', pratique: 'Mão na massa', evite: 'Um cuidado importante' }[key]);
     const items = data.steps || data.items || [];
-    return `<h3>${escape(title)}</h3>${data.body ? `<p>${escape(data.body)}</p>` : ''}${items.length ? `<${data.steps ? 'ol' : 'ul'}>${items.map(item => `<li>${escape(item)}</li>`).join('')}</${data.steps ? 'ol' : 'ul'}>` : ''}${data.tip ? `<p class="lesson-callout">${escape(data.tip)}</p>` : ''}`;
+    const exercise = key === 'pratique' && ui.chapters[ui.current]?.id === 'beatmatch'
+      ? '<div class="bpm-exercise-mount" data-bpm-exercise></div>'
+      : '';
+    const jogExercise = key === 'evite' && ui.chapters[ui.current]?.id === 'beatmatch'
+      ? '<div class="jog-exercise-mount" data-jog-exercise></div>'
+      : '';
+    return `<h3>${escape(title)}</h3>${data.body ? `<p>${escape(data.body)}</p>` : ''}${items.length ? `<${data.steps ? 'ol' : 'ul'}>${items.map(item => `<li>${escape(item)}</li>`).join('')}</${data.steps ? 'ol' : 'ul'}>` : ''}${data.tip ? `<p class="lesson-callout">${escape(data.tip)}</p>` : ''}${exercise}${jogExercise}`;
   }
   function updateStats() {
     const done = ui.completed.size;
@@ -189,17 +211,68 @@ import { lessonCompletionControlMarkup } from './lesson-completion-control.js';
       ...profileDraft, current: ui.current,
       started: [...ui.started], completed: [...ui.completed],
       chapterSections: Object.fromEntries([...ui.completedSections].map(([index, sections]) => [index, sections])),
-      score: ui.score, answered: [...ui.answered],
+      score: ui.score, answered: [...ui.answered], exerciseLogs: ui.exerciseLogs,
     });
     if (!saved) showToast('O navegador não permitiu salvar a prévia. Verifique o espaço disponível.');
     return saved;
   }
+  async function continueFromExercise() {
+    const sectionIndex = tabs.findIndex(([key]) => key === ui.tab);
+    const nextSection = tabs[sectionIndex + 1];
+    if (nextSection) {
+      ui.tab = nextSection[0];
+      recordSection(ui.current, ui.tab);
+      renderList();
+      renderLesson();
+      await persistProgress(ui.current);
+      return;
+    }
+    const nextChapter = ui.current + 1;
+    if (!ui.chapters[nextChapter]) return;
+    const previousCurrent = ui.current;
+    ui.current = nextChapter;
+    ui.tab = 'entenda';
+    ui.started.add(nextChapter);
+    recordSection(nextChapter, 'entenda');
+    renderList();
+    renderLesson();
+    if (!await persistProgress(nextChapter)) {
+      ui.current = previousCurrent;
+      ui.tab = 'pratique';
+      renderList();
+      renderLesson();
+    }
+  }
   function renderLesson() {
     const chapter = ui.chapters[ui.current];
     if (!chapter) return;
+    activeExerciseCleanup();
+    activeExerciseCleanup = () => {};
     const theory = chapter.theoryMinutes, practice = chapter.practiceMinutes;
     const data = chapter.sections[ui.tab];
     panel.innerHTML = `<div class="lesson-meta mono"><span>MÓDULO ${String(ui.current + 1).padStart(2, '0')} / 10 · RASCUNHO</span><span>${Math.round(chapterHours(chapter) * 60)} MIN NO TOTAL</span></div><h2>${escape(chapter.title)}</h2><p class="lesson-summary">${escape(chapter.summary)}</p><div class="lesson-time mono"><div><span>TEORIA / DEMONSTRAÇÃO</span><strong>${formatDuration(theory)}</strong></div><div><span>PRÁTICA / REVISÃO</span><strong>${formatDuration(practice)}</strong></div></div><label class="lesson-section-select mono" for="lesson-section-select">PARTE DA AULA<select id="lesson-section-select" data-lesson-section>${tabs.map(([key, label]) => `<option value="${key}" ${key === ui.tab ? 'selected' : ''}>${label}</option>`).join('')}</select></label><div class="lesson-copy">${renderBlock(ui.tab, data)}</div><div class="lesson-actions">${lessonCompletionControlMarkup(ui.completed.has(ui.current))}<span class="mono">${activeSupabase && ui.userId ? 'PROGRESSO E PONTOS SALVOS NA CONTA' : 'PRÉVIA SALVA SÓ NESTE NAVEGADOR'}</span></div>`;
+    const mount = panel.querySelector('[data-bpm-exercise]');
+    if (mount) {
+      const exerciseLogs = ui.exerciseLogs.filter(log => log.exercise === 'beatmatch-bpm');
+      activeExerciseCleanup = mountBpmExercise(mount, {
+        attemptOffset: exerciseLogs.length,
+        onComplete: () => { savePreviewState(); },
+        onAttempt: log => { ui.exerciseLogs.push({ ...log, chapter: ui.chapters[ui.current]?.id || '' }); savePreviewState(); },
+        onContinue: continueFromExercise,
+      });
+    }
+    const jogMount = panel.querySelector('[data-jog-exercise]');
+    if (jogMount) {
+      const jogLogs = ui.exerciseLogs.filter(log => log.exercise === 'beatmatch-jog');
+      const cleanupJog = mountJogExercise(jogMount, {
+        attemptOffset: jogLogs.length,
+        onComplete: () => { savePreviewState(); },
+        onAttempt: log => { ui.exerciseLogs.push({ ...log, chapter: ui.chapters[ui.current]?.id || '' }); savePreviewState(); },
+        onContinue: continueFromExercise,
+      });
+      const previousCleanup = activeExerciseCleanup;
+      activeExerciseCleanup = () => { previousCleanup(); cleanupJog(); };
+    }
     updateStats();
   }
   list.addEventListener('click', async event => {

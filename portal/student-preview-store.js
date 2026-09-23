@@ -4,7 +4,7 @@ const STORAGE_KEY = 'only-djs.student-preview.v1';
 
 const emptyState = () => ({
   name: '', email: '', phone: '', instagram: '', social: '',
-  current: 0, started: [], completed: [], chapterSections: {}, score: 0, answered: [],
+  current: 0, started: [], completed: [], chapterSections: {}, score: 0, answered: [], exerciseLogs: [],
 });
 
 function cleanIndexList(value) {
@@ -17,6 +17,21 @@ function cleanChapterSections(value) {
     .filter(([index]) => /^\d{1,3}$/.test(index))
     .map(([index, sections]) => [index, normalizeChapterSections(sections)])
     .filter(([, sections]) => sections.length));
+}
+
+function cleanExerciseLogs(value) {
+  if (!Array.isArray(value)) return [];
+  return value.filter(log => log && typeof log === 'object' && ['beatmatch-bpm', 'beatmatch-jog'].includes(log.exercise))
+    .slice(-1000)
+    .map(log => ({
+      exercise: ['beatmatch-bpm', 'beatmatch-jog'].includes(log.exercise) ? log.exercise : 'beatmatch-bpm',
+      chapter: typeof log.chapter === 'string' ? log.chapter.slice(0, 80) : '',
+      attempt: Number.isSafeInteger(log.attempt) && log.attempt > 0 ? log.attempt : 1,
+      bpm: Number.isFinite(log.bpm) ? Number(log.bpm.toFixed(1)) : null,
+      elapsedSeconds: Number.isFinite(log.elapsedSeconds) ? Math.max(0, Math.floor(log.elapsedSeconds)) : 0,
+      result: ['success', 'timeout', 'stopped_early'].includes(log.result) ? log.result : 'stopped_early',
+      recordedAt: typeof log.recordedAt === 'string' ? log.recordedAt.slice(0, 40) : '',
+    }));
 }
 
 function normalizeState(value) {
@@ -33,6 +48,7 @@ function normalizeState(value) {
     chapterSections: cleanChapterSections(value.chapterSections),
     score: Number.isSafeInteger(value.score) && value.score >= 0 ? value.score : 0,
     answered: Array.isArray(value.answered) ? [...new Set(value.answered.filter(key => typeof key === 'string' && /^\d+-\d+$/.test(key)).slice(0, 500))] : [],
+    exerciseLogs: cleanExerciseLogs(value.exerciseLogs),
   };
 }
 

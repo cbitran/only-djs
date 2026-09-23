@@ -1,14 +1,18 @@
 const SIDEBAR_KEY = 'only-djs.student-navigation.sidebar.v1';
-const CHAPTERS_KEY = 'only-djs.student-navigation.chapters.v1';
+const CHAPTERS_KEY = 'only-djs.student-navigation.chapters.v2';
 
 export function createNavigationPreferences(storage) {
   return {
     load() {
-      const read = key => {
+      const read = (key, fallback = false) => {
         try { return storage?.getItem(key) === 'true'; }
-        catch { return false; }
+        catch { return fallback; }
       };
-      return { sidebarCollapsed: read(SIDEBAR_KEY), chapterListCollapsed: read(CHAPTERS_KEY) };
+      const storedChapters = storage?.getItem?.(CHAPTERS_KEY);
+      return {
+        sidebarCollapsed: read(SIDEBAR_KEY),
+        chapterListCollapsed: storedChapters === null || storedChapters === undefined ? true : read(CHAPTERS_KEY),
+      };
     },
     save({ sidebarCollapsed, chapterListCollapsed } = {}) {
       try {
