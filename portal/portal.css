@@ -471,10 +471,33 @@ h1 em { font-style:normal; font-weight:200; }
 .admin-invite-card fieldset label { display:flex; gap:10px; align-items:center; padding:7px 0; font-size:13px; }
 .admin-invite-card input[type="checkbox"] { accent-color:var(--acid); width:16px; height:16px; }
 .admin-invite-card [hidden] { display:none!important; }
-.accept-invite-card { max-width:480px; margin:70px 0 0 auto; border-top:1px solid var(--ink); padding-top:24px; }
-.accept-invite-card h1 { font-size:clamp(44px,8vw,90px); }
-.accept-invite-card .lede { margin-left:0; }
-.accept-invite-card .card { margin-top:30px; }
+.accept-invite-topbar { align-items:center; border:0; padding:0; }
+.accept-invite-topbar>a:last-child { margin-left:auto; }
+.accept-invite-brand { display:block; width:128px; height:72px; overflow:hidden; }
+.accept-invite-brand img { display:block; width:100%; height:100%; object-fit:cover; filter:invert(1) contrast(4); }
+.accept-invite-layout { display:grid; grid-template-columns:minmax(260px, .9fr) minmax(380px, 520px); align-items:center; gap:clamp(48px,10vw,150px); max-width:1100px; min-height:calc(100svh - 120px); margin:0 auto; }
+.accept-invite-visual { align-self:stretch; display:flex; align-items:center; justify-content:center; min-width:0; min-height:500px; margin:0; overflow:hidden; }
+.accept-invite-visual img { display:block; width:min(100%,440px); max-height:78svh; object-fit:contain; object-position:center bottom; filter:grayscale(1) contrast(1.04); }
+.accept-invite-card { width:100%; max-width:520px; margin:0; padding:0; }
+.accept-invite-card .eyebrow { margin:0 0 22px; }
+.accept-invite-card h1 { font-size:clamp(56px,7vw,94px); line-height:.84; }
+.accept-invite-card .lede { margin:22px 0 0; font-size:16px; }
+.accept-invite-card .card { max-width:none; margin:24px 0 0; border:0; padding:0; }
+.accept-invite-card .field { gap:7px; margin:15px 0; }
+.accept-invite-card .field input { padding:9px 0; font-size:17px; }
+.accept-invite-card .action { min-height:54px; margin-top:8px; padding:16px 18px; }
+.accept-invite-card .auth-status { margin:9px 0 0; }
+@media(max-width:760px) {
+  .portal:has(.accept-invite-layout) { padding:16px 20px 28px; }
+  .accept-invite-brand { width:104px; height:58px; }
+  .accept-invite-layout { grid-template-columns:minmax(0,1fr); gap:8px; min-height:0; margin:18px auto 0; }
+  .accept-invite-visual { grid-row:2; min-height:0; height:180px; justify-content:flex-end; }
+  .accept-invite-visual img { width:150px; height:180px; max-height:none; object-position:center bottom; }
+  .accept-invite-card { grid-row:1; }
+  .accept-invite-card h1 { font-size:clamp(52px,14vw,76px); }
+  .accept-invite-card .lede { margin-top:17px; }
+  .accept-invite-card .card { margin-top:20px; }
+}
 .admin-roster { margin-top:72px; border-top:1px solid var(--ink); padding-top:18px; }
 .admin-roster .row { border-bottom:0; }
 .roster-empty { color:var(--muted); font-size:13px; padding:18px 0; }
