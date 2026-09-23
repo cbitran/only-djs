@@ -7,17 +7,24 @@ export async function activatePendingInvite(invokeActivation) {
   }
 }
 
-export async function completeInvitePassword(updatePassword, invokeActivation) {
+export async function completeInvitePassword(updatePassword, invokeActivation, checkIsAdmin) {
   try {
     const { error } = await updatePassword();
     if (error) return 'password-error';
   } catch {
     return 'password-error';
   }
+  if (checkIsAdmin) {
+    try {
+      if (await checkIsAdmin()) return 'admin-saved';
+    } catch {
+      return 'role-check-pending';
+    }
+  }
   return await activatePendingInvite(invokeActivation) ? 'activated' : 'activation-pending';
 }
 
-export async function completeAccessSetup({ isRecovery, updatePassword, invokeActivation }) {
+export async function completeAccessSetup({ isRecovery, updatePassword, invokeActivation, checkIsAdmin }) {
   if (isRecovery) {
     try {
       const { error } = await updatePassword();
@@ -26,5 +33,5 @@ export async function completeAccessSetup({ isRecovery, updatePassword, invokeAc
       return 'password-error';
     }
   }
-  return completeInvitePassword(updatePassword, invokeActivation);
+  return completeInvitePassword(updatePassword, invokeActivation, checkIsAdmin);
 }
