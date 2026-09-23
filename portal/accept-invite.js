@@ -7,7 +7,7 @@ const button = form.querySelector("button[type=submit]");
 const retryButton = document.querySelector("#retry-activation");
 const searchParams = new URLSearchParams(location.search);
 const isRecovery = searchParams.get("flow") === "recovery";
-document.querySelector("#flow-label").textContent = isRecovery ? "RECUPERAÇÃO DE ACESSO" : "CONVITE À ESCOLA";
+document.querySelector("#flow-label").textContent = isRecovery ? "RECUPERAÇÃO DE ACESSO" : "ACESSO À SUA ÁREA";
 
 function announce(message, error = false) {
   status.textContent = message;
