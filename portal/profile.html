@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f7f5">
+  <title>ONLY DJs — Meu perfil</title>
+  <link rel="stylesheet" href="portal.css">
+  <script type="module" src="profile.js"></script>
+</head>
+<body class="student-page">
+  <main class="portal student-portal profile-portal">
+    <header class="topbar student-topbar">
+      <a class="brand" href="student.html" aria-label="ONLY DJs — área do aluno"><img class="brand-logo" src="../source/landing-page-only-djs/project/uploads/logo_onlydjayz.png" alt="ONLY DJs"></a>
+      <div class="preview-flag mono" id="profile-mode"><span></span> PRÉVIA LOCAL · SALVA NESTE NAVEGADOR</div>
+      <a class="mono logout-link" id="profile-logout" href="login.html">SAIR ↗</a>
+    </header>
+    <div class="student-shell" id="profile-shell">
+      <aside class="student-sidebar" id="student-sidebar" aria-label="Navegação da área do aluno">
+        <button class="sidebar-toggle mono" id="sidebar-toggle" type="button" aria-expanded="true" aria-controls="student-sidebar-content" aria-label="Recolher menu">‹</button>
+        <div class="sidebar-body" id="student-sidebar-content">
+        <div class="student-identity">
+          <span class="avatar-picker" aria-hidden="true"><span id="avatar-mark">B</span><img id="avatar-preview" alt="" hidden></span>
+          <div><span class="mono tiny-label">ALUNO</span><strong id="profile-name-display">Bitran</strong></div>
+        </div>
+        <nav class="student-nav mono">
+          <a href="student.html#visao-geral" aria-label="Visão geral" title="Visão geral"><span class="nav-icon" aria-hidden="true">⌂</span><span class="nav-label">Visão geral</span><span class="nav-number">01</span></a>
+          <a href="student.html#conteudo" aria-label="Conteúdo" title="Conteúdo"><span class="nav-icon" aria-hidden="true">♫</span><span class="nav-label">Conteúdo</span><span class="nav-number">02</span></a>
+          <a class="active" href="profile.html" aria-current="page" aria-label="Meu perfil" title="Meu perfil"><span class="nav-icon" aria-hidden="true">◎</span><span class="nav-label">Meu perfil</span><span class="nav-number">03</span></a>
+          <a class="active" href="#certificado" aria-label="Certificado" title="Certificado"><span class="nav-icon" aria-hidden="true">↗</span><span class="nav-label">Certificado</span><span class="nav-number">04</span></a>
+        </nav>
+        <div class="sidebar-bottom"><div class="sidebar-label mono">FORMAÇÃO</div><div class="sidebar-course">DO PRIMEIRO<br><em>PLAY</em> AO BOOTH.</div><div class="sidebar-hours"><span class="mono">CARGA TOTAL</span><strong>24<span>h</span></strong></div></div>
+        </div>
+      </aside>
+      <section class="student-main profile-main" aria-labelledby="profile-title">
+        <a class="profile-back mono" href="student.html#visao-geral">← VOLTAR À VISÃO GERAL</a>
+        <div class="profile-heading"><div><div class="eyebrow mono">SEU ESPAÇO · DADOS PESSOAIS</div><h1 id="profile-title">SEU<br><em>PERFIL.</em></h1></div><p>Deixe suas informações atualizadas. Você pode voltar e editar quando quiser.</p></div>
+        <form id="profile-form" class="profile-page-card">
+          <section class="profile-avatar-section" aria-labelledby="avatar-title">
+            <span class="mono tiny-label">SUA IMAGEM</span>
+            <div class="profile-avatar-large"><span id="profile-avatar-mark">B</span><img id="profile-avatar-preview" alt="Avatar atual" hidden></div>
+            <h2 id="avatar-title">Seu avatar</h2>
+            <p class="preview-note" id="avatar-note">JPG, PNG ou WebP, até 3 MB.</p>
+            <label class="profile-file-button mono" for="avatar-file">ESCOLHER / TROCAR FOTO</label>
+            <input id="avatar-file" type="file" accept="image/jpeg,image/png,image/webp" hidden>
+            <button class="profile-avatar-remove mono" id="avatar-remove" type="button" hidden>REMOVER FOTO</button>
+          </section>
+          <section class="profile-fields" aria-label="Seus dados">
+            <label><span class="mono">NOME</span><input id="profile-name" name="name" value="Bitran" autocomplete="name" required></label>
+            <label><span class="mono">E-MAIL</span><input id="profile-email" name="email" type="email" placeholder="seu@email.com" autocomplete="email"></label>
+            <label><span class="mono">TELEFONE</span><input name="phone" type="tel" placeholder="(00) 00000-0000" autocomplete="tel"></label>
+            <label><span class="mono">INSTAGRAM</span><input name="instagram" placeholder="@seuperfil" autocomplete="off"></label>
+            <label class="profile-social-field"><span class="mono">OUTRA REDE / LINK</span><input name="social" type="url" placeholder="https://"></label>
+            <button class="save-preview mono" id="profile-save" type="submit">SALVAR ALTERAÇÕES <span>→</span></button>
+            <p class="preview-note" id="profile-save-note">Na prévia, as informações ficam salvas somente neste navegador.</p>
+          </section>
+        </form>
+        <article class="certificate-card profile-certificate-card" id="certificado" aria-labelledby="certificate-title">
+          <div class="section-heading compact-heading"><div><span class="mono tiny-label">SEU PRÓXIMO MARCO</span><h2 id="certificate-title">Certificado.</h2></div><span class="certificate-stamp mono">EM BREVE</span></div>
+          <p>Quando os critérios do curso e sua conexão estiverem definidos, você poderá acompanhar a elegibilidade e solicitar ou baixar seu certificado por aqui.</p>
+          <button class="certificate-action mono" type="button" disabled>INDISPONÍVEL NESTA PRÉVIA <span>↗</span></button>
+          <p class="preview-note">Nenhuma regra de aprovação ou emissão foi presumida.</p>
+        </article>
+        <footer class="student-footer mono"><span>ONLY DJs · MEU PERFIL</span><span id="profile-footer-note">DADOS SALVOS SÓ NESTE NAVEGADOR</span></footer>
+      </section>
+    </div>
+    <div class="toast mono" id="profile-toast" role="status" aria-live="polite"></div>
+  </main>
+  <script src="supabase-config.js"></script>
+</body>
+</html>

@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<script src="./image-slot.js"></script>
+<style>
+html,body{margin:0;padding:0;background:#F7F7F5;color:#111;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#111;text-decoration:none}
+a:hover{color:#000}
+::selection{background:#D6FF3D;color:#111}
+@media (prefers-reduced-motion: reduce){*{scroll-behavior:auto!important}}
+@media (max-width: 600px){
+  #top{height:max(100svh,680px)!important;min-height:680px}
+  #top .hero-bg-word{left:12cqw!important;top:25vh!important;font-size:30cqw!important;opacity:.7}
+  #top .hero-dj{left:39cqw!important;top:31vh!important;bottom:auto!important;width:59cqw!important;height:63vh!important;z-index:1}
+  #top .hero-female{right:2cqw!important;top:auto!important;bottom:18cqw!important;width:auto!important;height:45vh!important;z-index:2;opacity:.92}
+  #top .hero-copy{left:5cqw!important;top:18vh!important;max-width:78cqw!important;gap:14px!important;z-index:4}
+  #top .hero-copy p{font-size:14px!important;line-height:1.45!important}
+  #top .hero-copy > div:first-child{font-size:10px!important}
+  #top .hero-copy a{height:48px!important;padding:0 17px!important;font-size:10px!important}
+  #top .hero-copy a + a{font-size:10px!important}
+  #top .hero-title{left:4cqw!important;bottom:5cqw!important;font-size:22cqw!important;line-height:.78!important;z-index:2}
+  #top .hero-title span:nth-child(2){padding-left:14cqw!important}
+  #top .hero-cues{right:5cqw!important;bottom:28cqw!important;font-size:9px!important;gap:5px!important}
+  #top .hero-eq{right:5cqw!important;bottom:9cqw!important;width:34cqw!important;opacity:.8}
+  #professor .professor-heading span:first-child{font-size:10cqw!important;transform:translateX(9cqw)!important}
+  #professor .professor-heading span:nth-child(2){font-size:18cqw!important;padding-left:0!important;align-self:flex-end!important;margin-right:8cqw!important}
+  #contato .contact-layout{display:flex!important;flex-direction:column!important;gap:8vh!important}
+  #contato .contact-copy,#contato .contact-form{width:100%!important;max-width:none!important;flex:none!important}
+  #contato .contact-visual{width:52cqw!important;max-width:none!important;margin:-2vh 0 0 28cqw!important;transform:none!important}
+}
+.contact-layout{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(360px,520px);gap:6cqw;align-items:start}
+.contact-copy,.contact-form{min-width:0!important;max-width:none!important;flex:none!important}
+.contact-visual{position:relative}
+.contact-visual::after{content:"";position:absolute;left:14%;right:10%;bottom:2.5%;height:5%;border-radius:50%;background:rgba(0,0,0,.2);filter:blur(13px);transform:scaleY(.55);transform-origin:center;z-index:0;pointer-events:none}
+.contact-visual img{position:relative;z-index:1;filter:grayscale(1) contrast(1.04) drop-shadow(0 18px 13px rgba(0,0,0,.12))}
+@media (min-width: 601px){
+  #top .hero-dj{left:58cqw!important;height:min(94vh,145cqw)!important;z-index:1!important}
+  #top .hero-female{left:25cqw!important;right:auto!important;bottom:7vh!important;height:80vh!important;z-index:2!important}
+  #top .hero-title{z-index:3!important}
+  #top .hero-cues{right:7cqw!important;bottom:27vh!important;z-index:10!important;background:rgba(247,247,245,.72);padding:6px 8px!important}
+  #top .hero-eq{right:7cqw!important;bottom:9vh!important;z-index:10!important}
+}
+@media (min-width: 1281px){
+  #top .hero-copy{max-width:300px!important}
+  #top .hero-cues{right:7cqw!important}
+}
+@media (min-width: 1025px) and (max-width: 1280px){
+  #top .hero-dj{left:57cqw!important;height:91vh!important}
+  #top .hero-female{left:24cqw!important;height:76vh!important;bottom:6vh!important}
+  #top .hero-copy{max-width:27cqw!important}
+  #top .hero-title{font-size:18cqw!important}
+  #top .hero-cues{right:5cqw!important;bottom:25vh!important}
+  #top .hero-eq{right:5cqw!important;width:145px!important}
+  .contact-layout{grid-template-columns:minmax(0,1fr) minmax(320px,440px)!important}
+}
+@media (min-width: 769px) and (max-width: 1024px){
+  #top{height:max(100vh,700px)!important}
+  #top .hero-bg-word{left:26cqw!important;top:16vh!important;font-size:30cqw!important}
+  #top .hero-dj{left:55cqw!important;height:82vh!important}
+  #top .hero-female{left:20cqw!important;height:68vh!important;bottom:9vh!important}
+  #top .hero-copy{top:17vh!important;max-width:29cqw!important}
+  #top .hero-copy p{font-size:13px!important}
+  #top .hero-title{font-size:17cqw!important;bottom:6vh!important}
+  #top .hero-cues{right:4cqw!important;bottom:24vh!important;font-size:9px!important}
+  #top .hero-eq{right:4cqw!important;width:120px!important}
+  .contact-layout{grid-template-columns:minmax(0,1fr) minmax(290px,390px)!important;gap:4cqw!important}
+  .contact-form{padding-top:8vh!important}
+}
+@media (min-width: 601px) and (max-width: 768px){
+  #top{height:max(100vh,680px)!important}
+  #top .hero-bg-word{left:18cqw!important;top:22vh!important;font-size:28cqw!important}
+  #top .hero-dj{left:53cqw!important;height:70vh!important}
+  #top .hero-female{left:15cqw!important;height:58vh!important;bottom:13vh!important}
+  #top .hero-copy{top:16vh!important;max-width:34cqw!important}
+  #top .hero-copy p{font-size:12px!important}
+  #top .hero-title{font-size:15cqw!important}
+  #top .hero-cues{right:3cqw!important;bottom:23vh!important;font-size:8px!important}
+  #top .hero-eq{right:3cqw!important;width:100px!important}
+  .contact-layout{grid-template-columns:minmax(0,1fr) minmax(250px,330px)!important;gap:3cqw!important}
+  .contact-visual{width:34cqw!important;margin-left:8cqw!important}
+  .contact-form{padding-top:5vh!important}
+}
+@media (max-width: 600px){
+  #contato{padding-top:10vh!important}
+  #contato .contact-layout{gap:2vh!important}
+  #contato .contact-visual{width:46cqw!important;margin:-3vh 0 0 27cqw!important}
+  #contato .contact-form{padding-top:0!important}
+  #top .hero-bg-word{font-size:27cqw!important;top:25vh!important}
+  #top .hero-dj{left:43cqw!important;top:25vh!important;width:56cqw!important;height:58vh!important}
+  #top .hero-female{right:0!important;bottom:25cqw!important;height:40vh!important;opacity:.9}
+  #top .hero-copy{top:18vh!important;max-width:78cqw!important}
+  #top .hero-title{font-size:20cqw!important}
+  #top .hero-cues{right:4cqw!important;bottom:27cqw!important;font-size:8px!important;padding:4px 6px!important}
+  #top .hero-eq{right:4cqw!important;bottom:8cqw!important;width:31cqw!important}
+  #top .hero-eq div:last-child{font-size:8px!important}
+}
+@media (max-width: 390px){
+  header{padding-left:4cqw!important;padding-right:4cqw!important}
+  #top{height:max(100svh,650px)!important;min-height:650px!important}
+  #top .hero-bg-word{left:7cqw!important;top:29vh!important;font-size:25cqw!important;opacity:.55!important}
+  #top .hero-dj{left:45cqw!important;top:23vh!important;height:55vh!important;opacity:.94}
+  #top .hero-female{right:-3cqw!important;bottom:26cqw!important;height:36vh!important}
+  #top .hero-copy{left:5cqw!important;top:17vh!important;max-width:76cqw!important;gap:12px!important}
+  #top .hero-copy p{font-size:13px!important;line-height:1.35!important}
+  #top .hero-copy a{height:44px!important}
+  #top .hero-title{left:4cqw!important;bottom:6cqw!important;font-size:18cqw!important}
+  #top .hero-cues{right:4cqw!important;bottom:28cqw!important;font-size:7px!important;gap:4px!important}
+  #top .hero-cues span{width:7px!important;height:7px!important}
+  #top .hero-eq{right:4cqw!important;bottom:9cqw!important;width:29cqw!important}
+  #top .hero-eq div:last-child{display:none!important}
+  #contato{padding-top:8vh!important}
+  .contact-layout{gap:1vh!important}
+  .contact-visual{width:54cqw!important;margin:-2vh 0 0 23cqw!important}
+  .contact-form{padding-top:0!important}
+}
+@media (min-width: 769px){
+  #professor > div:nth-of-type(2){gap:3cqw!important;align-items:flex-start!important}
+  #professor > div:nth-of-type(2) > div:first-child{flex:0 1 38cqw!important;max-width:520px!important;margin-left:2cqw!important}
+  #professor > div:nth-of-type(2) > div:nth-child(2){flex:1 1 520px!important;max-width:none!important;padding-top:2vh!important;position:relative;z-index:2}
+  #professor .professor-heading{position:relative;z-index:3;width:72cqw;max-width:920px;margin-left:-16cqw!important;mix-blend-mode:multiply;transform:rotate(-2deg)!important}
+  #professor .professor-heading span:first-child{font-size:clamp(58px,7.5cqw,128px)!important;letter-spacing:-.06em!important;white-space:nowrap}
+  #professor .professor-heading span:nth-child(2){font-size:clamp(82px,13cqw,220px)!important;line-height:.72!important;padding-left:20cqw!important;margin-top:-1cqw!important;white-space:nowrap}
+  #professor > div:nth-of-type(2) > div:nth-child(2) > p{position:relative;z-index:4;margin-top:8vh!important;margin-left:5cqw!important;max-width:430px!important}
+  #professor > div:nth-of-type(2) > div:nth-child(2) > div{margin-left:5cqw!important}
+}
+</style>
+</helmet>
+<div ref="{{ rootRef }}" style="position:relative;width:100%;max-width:1440px;margin:0 auto;container-type:inline-size;overflow-x:clip;background:#F7F7F5;font-family:'Instrument Sans',system-ui,sans-serif;color:#111">
+
+<div ref="{{ curRef }}" aria-hidden="true" style="position:fixed;left:0;top:0;width:12px;height:12px;border-radius:50%;background:#fff;mix-blend-mode:difference;pointer-events:none;z-index:200;transition:scale .3s"></div>
+
+<header style="position:fixed;top:0;left:0;right:0;z-index:60;display:flex;align-items:flex-start;justify-content:space-between;gap:24px;padding:20px 3cqw;mix-blend-mode:difference;color:#fff;pointer-events:none">
+  <a href="#top" onClick="{{ goTop }}" aria-label="Only DjayZ — início" style="pointer-events:auto;display:block;width:64px;height:56px;overflow:hidden;flex:none">
+    <img src="assets/logo.png" alt="Only DjayZ" style="display:block;width:136px;max-width:none;margin:-40px 0 0 -36px;filter:contrast(4)">
+  </a>
+  <div style="display:flex;flex-wrap:wrap;gap:4cqw;font:500 11px/1.6 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;padding-top:4px">
+    <div>DJ School<br>Est. 2026</div>
+    <div>Music / Culture<br>Performance</div>
+  </div>
+  <div style="pointer-events:none;display:flex;align-items:center;gap:8px">
+    <a href="portal/login.html" style="pointer-events:auto;display:flex;align-items:center;height:44px;padding:0 14px;background:#fff;color:#000;font:500 10px/1 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase">ÁREA DE MEMBROS</a>
+    <button onClick="{{ toggleMenu }}" aria-expanded="{{ menuOpen }}" data-magnetic="1" style="pointer-events:auto;flex:none;background:#fff;color:#000;border:0;height:44px;padding:0 18px;display:flex;align-items:center;gap:14px;font:500 11px/1 'JetBrains Mono',monospace;letter-spacing:.12em;cursor:pointer">
+      <span>{{ menuLabel }}</span>
+      <span style="display:flex;flex-direction:column;gap:5px"><span style="display:block;width:18px;height:2px;background:#000"></span><span style="display:block;width:12px;height:2px;background:#000"></span></span>
+    </button>
+  </div>
+</header>
+
+<div aria-hidden="true" style="position:fixed;inset:0;z-index:55;pointer-events:none;mix-blend-mode:difference;color:#fff;font:500 10px/1 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase">
+  <div style="position:absolute;left:3cqw;bottom:28px;display:flex;align-items:center;gap:12px">
+    <span style="writing-mode:vertical-rl;transform:rotate(180deg)">Scroll</span>
+    <span style="display:block;width:1px;height:48px;background:#fff"></span>
+    <span ref="{{ pctRef }}">000%</span>
+  </div>
+  <div style="position:absolute;right:3cqw;top:50%;writing-mode:vertical-rl;display:flex;gap:18px;align-items:center">
+    <span ref="{{ secRef }}">000 / Intro</span>
+    <span style="display:block;width:1px;height:40px;background:#fff"></span>
+  </div>
+</div>
+
+<nav aria-label="Menu principal" aria-hidden="{{ menuHidden }}" style="position:fixed;inset:0;z-index:58;background:#0E0E0E;color:#F7F7F5;clip-path:{{ menuClip }};transition:clip-path .9s cubic-bezier(.77,0,.18,1);display:flex;flex-direction:column;justify-content:space-between;padding:110px 3cqw 3cqw;overflow:hidden">
+  <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:40px;position:relative;z-index:2">
+    <div style="display:flex;flex-direction:column;gap:4px">
+      <sc-for list="{{ menuLinks }}" as="l" hint-placeholder-count="6">
+        <a href="#" onClick="{{ l.go }}" style="display:flex;align-items:baseline;gap:18px;color:#F7F7F5;font:300 clamp(34px,5.4cqw,84px)/1.02 'Archivo',sans-serif;font-stretch:110%;letter-spacing:-.02em;transition:padding .5s cubic-bezier(.2,.7,.1,1),font-weight .4s,color .3s" style-hover="padding-left:3cqw;font-weight:800;color:var(--acc,#D6FF3D)">
+          <span style="font:500 11px/1 'JetBrains Mono',monospace;letter-spacing:.1em;color:#8C8C88">{{ l.n }}</span>{{ l.label }}
+        </a>
+      </sc-for>
+      <a href="portal/login.html" style="display:flex;align-items:baseline;gap:18px;color:#F7F7F5;font:300 clamp(34px,5.4cqw,84px)/1.02 'Archivo',sans-serif;font-stretch:110%;letter-spacing:-.02em;transition:padding .5s cubic-bezier(.2,.7,.1,1),font-weight .4s,color .3s" style-hover="padding-left:3cqw;font-weight:800;color:var(--acc,#D6FF3D)">
+        <span style="font:500 11px/1 'JetBrains Mono',monospace;letter-spacing:.1em;color:#8C8C88">10</span>ÁREA DO ALUNO
+      </a>
+    </div>
+    <div style="display:flex;flex-direction:column;justify-content:flex-end;gap:10px;font:500 11px/1.7 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#B8B8B4">
+      <span>Instagram — @onlydjayz</span><span>WhatsApp — contato em preparação</span><span>contato em preparação</span>
+    </div>
+  </div>
+  <div aria-hidden="true" style="font:900 23cqw/.78 'Archivo',sans-serif;font-stretch:125%;letter-spacing:-.05em;display:flex;flex-direction:column;margin-bottom:-4cqw">
+    <span style="display:block;overflow:hidden"><span style="display:block;transform:{{ menuTitleY }};transition:transform 1.1s cubic-bezier(.2,.8,.1,1) .15s">ONLY</span></span>
+    <span style="display:block;overflow:hidden;padding-left:26cqw"><span style="display:block;transform:{{ menuTitleY }};transition:transform 1.1s cubic-bezier(.2,.8,.1,1) .28s;color:transparent;-webkit-text-stroke:1.5px #F7F7F5">DJAYZ</span></span>
+  </div>
+</nav>
+
+<section id="top" data-sec="001 / Intro" data-screen-label="Hero" style="position:relative;height:max(100vh,720px);overflow:hidden;background:#F7F7F5">
+  <div aria-hidden="true" style="position:absolute;left:38cqw;top:0;width:48cqw;height:48vh;background:radial-gradient(closest-side,color-mix(in oklch,var(--acc,#D6FF3D) 38%,transparent),transparent);filter:blur(30px);opacity:.7"></div>
+  <div class="hero-bg-word" data-speed="0.12" aria-hidden="true" style="position:absolute;left:22cqw;top:9vh;font:900 34cqw/.8 'Archivo',sans-serif;font-stretch:62%;letter-spacing:-.03em;color:transparent;-webkit-text-stroke:1px rgba(17,17,17,.16);white-space:nowrap;user-select:none">PLAY</div>
+  <div class="hero-dj" data-speed="0.05" style="position:absolute;left:44cqw;bottom:0;height:min(95vh,150cqw);aspect-ratio:1024/1536;z-index:1;pointer-events:none">
+    <img src="assets/dj-stand.jpg" alt="DJ da Only DjayZ segurando um controlador" style="display:block;width:100%;height:100%;object-fit:contain;object-position:bottom;filter:var(--photo,grayscale(1) contrast(1.05))">
+  </div>
+  <div class="hero-female" data-speed="-0.06" aria-hidden="true" style="position:absolute;right:1cqw;top:auto;bottom:8vh;width:auto;height:78vh;z-index:2;pointer-events:none;will-change:transform;filter:var(--photo,grayscale(1) contrast(1.03))">
+    <img src="assets/dj-female-flx4.jpg" alt="" style="display:block;width:100%;height:auto;object-fit:contain">
+  </div>
+  <div class="hero-copy" style="position:absolute;left:3cqw;top:15vh;z-index:4;max-width:min(300px,60cqw);display:flex;flex-direction:column;gap:18px">
+    <div style="display:flex;align-items:center;gap:12px;font:500 11px/1 'JetBrains Mono',monospace;letter-spacing:.12em"><span>(001)</span><span style="display:block;width:48px;height:1px;background:#111"></span><span>DJ SCHOOL</span></div>
+    <p style="margin:0;font:400 15px/1.5 'Instrument Sans',sans-serif;text-wrap:pretty;color:#2A2A28">Formação para a nova geração de DJs. Técnica, leitura de pista e performance — em equipamento de clube.</p>
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:22px">
+      <a href="#contato" onClick="{{ goContato }}" data-magnetic="1" style="display:flex;align-items:center;gap:14px;height:52px;padding:0 22px;background:#111;color:#F7F7F5;font:600 12px/1 'JetBrains Mono',monospace;letter-spacing:.12em;transition:background .3s,color .3s" style-hover="background:var(--acc,#D6FF3D);color:#111">→ COMECE AGORA</a>
+      <a href="#sobre" onClick="{{ goSobre }}" style="font:600 12px/1 'JetBrains Mono',monospace;letter-spacing:.12em;padding-bottom:6px;border-bottom:1px solid #111;transition:letter-spacing .4s" style-hover="letter-spacing:.2em">CONHEÇA A ESCOLA</a>
+    </div>
+  </div>
+  <h1 class="hero-title" data-speed="-0.04" style="position:absolute;left:2.4cqw;bottom:5vh;z-index:2;margin:0;color:#fff;mix-blend-mode:difference;font:900 19cqw/.8 'Archivo',sans-serif;font-stretch:125%;letter-spacing:-.055em;display:flex;flex-direction:column;pointer-events:none">
+    <span>ONLY</span>
+    <span style="padding-left:17cqw;display:flex;align-items:flex-start;gap:1.2cqw">DJAYZ<span style="font:500 11px/1 'JetBrains Mono',monospace;letter-spacing:.1em;margin-top:2cqw">®</span></span>
+  </h1>
+  <div class="hero-cues" style="position:absolute;right:5cqw;bottom:24vh;z-index:4;display:flex;flex-direction:column;gap:8px;font:500 11px/1 'JetBrains Mono',monospace;letter-spacing:.14em">
+    <div style="display:flex;align-items:center;gap:10px"><span data-cue="0" style="display:block;width:9px;height:9px;border:1px solid #111"></span>PLAY</div>
+    <div style="display:flex;align-items:center;gap:10px"><span data-cue="1" style="display:block;width:9px;height:9px;border:1px solid #111"></span>MIX</div>
+    <div style="display:flex;align-items:center;gap:10px"><span data-cue="2" style="display:block;width:9px;height:9px;border:1px solid #111"></span>CUE</div>
+    <div style="display:flex;align-items:center;gap:10px"><span data-cue="3" style="display:block;width:9px;height:9px;border:1px solid #111"></span>PERFORM</div>
+  </div>
+  <div class="hero-eq" style="position:absolute;right:5cqw;bottom:9vh;z-index:4;display:flex;flex-direction:column;gap:8px;width:170px">
+    <div aria-hidden="true" style="display:flex;align-items:flex-end;gap:2px;height:36px">
+      <sc-for list="{{ eqBars }}" as="b" hint-placeholder-count="28"><span data-eq="{{ b }}" style="display:block;flex:1;height:30%;background:#111"></span></sc-for>
+    </div>
+    <div style="display:flex;justify-content:space-between;font:500 10px/1 'JetBrains Mono',monospace;letter-spacing:.1em"><span>BPM 124</span><span>EST. 2026</span></div>
+  </div>
+  <span aria-hidden="true" style="position:absolute;left:33cqw;top:30vh;font:300 18px/1 'JetBrains Mono',monospace">+</span>
+  <span aria-hidden="true" style="position:absolute;left:84cqw;top:68vh;font:300 18px/1 'JetBrains Mono',monospace">+</span>
+</section>
+
+<div style="border-top:1px solid #111;border-bottom:1px solid #111;overflow:hidden;padding:2.2vh 0;background:#F7F7F5">
+  <div data-marquee="1" style="display:flex;width:max-content;white-space:nowrap;font:900 clamp(48px,7cqw,120px)/1 'Archivo',sans-serif;letter-spacing:-.03em">
+    <div style="display:flex;gap:4cqw;padding-right:4cqw;align-items:center"><span style="font-stretch:62%">LEARN.</span><span style="font:500 12px/1 'JetBrains Mono',monospace;letter-spacing:.14em">(01)</span><span style="font-stretch:125%;font-weight:200">MIX.</span><span style="font:500 12px/1 'JetBrains Mono',monospace;letter-spacing:.14em">(02)</span><span style="font-stretch:100%;color:transparent;-webkit-text-stroke:1.5px #111">PERFORM.</span><span style="display:block;width:.35em;height:.35em;background:var(--acc,#D6FF3D);border:1px solid #111"></span></div>
+    <div style="display:flex;gap:4cqw;padding-right:4cqw;align-items:center"><span style="font-stretch:62%">LEARN.</span><span style="font:500 12px/1 'JetBrains Mono',monospace;letter-spacing:.14em">(01)</span><span style="font-stretch:125%;font-weight:200">MIX.</span><span style="font:500 12px/1 'JetBrains Mono',monospace;letter-spacing:.14em">(02)</span><span style="font-stretch:100%;color:transparent;-webkit-text-stroke:1.5px #111">PERFORM.</span><span style="display:block;width:.35em;height:.35em;background:var(--acc,#D6FF3D);border:1px solid #111"></span></div>
+  </div>
+</div>
+
+<section id="sobre" data-sec="01 / About" data-screen-label="01 Sobre" style="position:relative;padding:18vh 4cqw 20vh;overflow:hidden">
+  <div data-speed="0.1" aria-hidden="true" style="position:absolute;right:-8cqw;top:4vh;font:900 22cqw/.8 'Archivo',sans-serif;font-stretch:125%;letter-spacing:-.05em;color:transparent;-webkit-text-stroke:1px rgba(17,17,17,.12);white-space:nowrap">CULTURE</div>
+  <div data-reveal="0" style="display:flex;align-items:center;gap:14px;font:500 11px/1 'JetBrains Mono',monospace;letter-spacing:.14em;margin-bottom:6vh;position:relative"><span>01</span><span style="display:block;width:6cqw;height:1px;background:#111"></span><span>ABOUT</span><span style="color:#5E5E5A">— ONLY DJAYZ</span></div>
+  <h2 style="margin:0;position:relative;display:flex;flex-direction:column">
+    <span data-reveal="0" style="font:200 clamp(40px,7.5cqw,128px)/.9 'Archivo',sans-serif;font-stretch:125%;letter-spacing:-.04em">NOT JUST</span>
+    <span data-reveal="120" style="font:900 clamp(64px,13cqw,220px)/.82 'Archivo',sans-serif;font-stretch:62%;letter-spacing:-.02em;padding-left:10cqw">A DJ SCHOOL.</span>
+  </h2>
+  <div style="display:flex;flex-wrap:wrap;gap:6cqw;margin-top:10vh;position:relative;align-items:flex-start">
+    <div style="flex:1 1 440px;max-width:560px;margin-left:6cqw;position:relative">
+      <div data-reveal="0" style="aspect-ratio:4/5;overflow:hidden;background:#111">
+        <image-slot id="about-main-fixed" src="assets/ambient-dj-booth-color.jpg" shape="rect" fit="cover" placeholder="Aluno na cabine — editorial" style="width:100%;height:100%"></image-slot>
+      </div>
+      <div data-speed="-0.12" style="position:absolute;right:-4cqw;bottom:-10vh;width:44%;z-index:2">
+        <div style="aspect-ratio:1/1;box-shadow:0 40px 70px -35px rgba(0,0,0,.4)">
+          <image-slot id="about-small-1" shape="rect" placeholder="Headphones — detalhe" style="width:100%;height:100%"></image-slot>
+        </div>
+        <div style="margin-top:8px;font:500 10px/1 'JetBrains Mono',monospace;letter-spacing:.1em">FIG. 01.B — MONITORING</div>
+      </div>
+      <div style="position:absolute;left:-4cqw;top:12%;writing-mode:vertical-rl;transform:rotate(180deg);font:500 10px/1 'JetBrains Mono',monospace;letter-spacing:.14em">ROOM 01 — BOOTH SESSION</div>
+    </div>
+    <div style="position:relative;z-index:3;flex:1 1 300px;max-width:400px;margin-top:22vh;display:flex;flex-direction:column;gap:28px;background:rgba(247,247,245,.9);padding-left:2cqw">
+      <div data-speed="0.08" style="width:58%;aspect-ratio:3/4;align-self:flex-end">
+        <image-slot id="about-small-2-fixed" src="assets/color-rooftop-cdj.jpg" shape="rect" fit="cover" placeholder="Vinil / crate" style="width:100%;height:100%"></image-slot>
+      </div>
+      <p data-reveal="0" style="margin:0;font:400 clamp(18px,1.5cqw,22px)/1.45 'Instrument Sans',sans-serif;text-wrap:pretty">Aprenda técnica, leitura de pista, seleção musical e performance em uma experiência construída para quem realmente quer tocar.</p>
+      <div data-reveal="100" style="display:flex;flex-wrap:wrap;gap:8px 18px;font:500 11px/1.4 'JetBrains Mono',monospace;letter-spacing:.1em;color:#5E5E5A"><span>TÉCNICA</span><span>/</span><span>PISTA</span><span>/</span><span>SELEÇÃO</span><span>/</span><span>PALCO</span></div>
+      <a href="#aulas" onClick="{{ goAulas }}" data-reveal="160" style="align-self:flex-start;display:flex;align-items:center;gap:14px;font:600 12px/1 'JetBrains Mono',monospace;letter-spacing:.12em">
+        <span data-magnetic="1" style="display:flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:50%;border:1px solid #111;font-size:16px;transition:background .3s" style-hover="background:var(--acc,#D6FF3D)">→</span>DISCOVER</a>
+    </div>
+  </div>
+</section>
+
+<section id="valor" data-sec="02 / Value" data-screen-label="02 Proposta" style="position:relative;padding:12vh 0 16vh;background:#fff;border-top:1px solid rgba(17,17,17,.12)">
+  <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;padding:0 4cqw 8vh;font:500 11px/1 'JetBrains Mono',monospace;letter-spacing:.14em"><span>02 — WHAT WE TRAIN</span><span style="color:#5E5E5A">FOUR DISCIPLINES / ONE SOUND</span></div>
+  <div data-reveal="0" style="display:flex;align-items:flex-end;flex-wrap:wrap;gap:3cqw;padding:3vh 4cqw;border-top:1px solid #111;transition:background .5s" style-hover="background:#F7F7F5">
+    <span style="font:900 clamp(96px,18cqw,300px)/.78 'Archivo',sans-serif;font-stretch:62%;color:transparent;-webkit-text-stroke:1.5px #111;transition:color .5s" style-hover="color:#111">01</span>
+    <span style="font:800 clamp(36px,5cqw,84px)/1 'Archivo',sans-serif;font-stretch:125%;letter-spacing:-.03em;transition:letter-spacing .5s" style-hover="letter-spacing:.02em">EQUIPMENT</span>
+    <p style="margin:0 0 1vh auto;max-width:280px;font:400 15px/1.5 'Instrument Sans',sans-serif;color:#3A3A37">Setup de clube desde a primeira aula: players, mixer, fluxo de sinal e monitoramento.</p>
+  </div>
+  <div data-reveal="0" style="display:flex;align-items:center;flex-wrap:wrap;justify-content:flex-end;gap:3cqw;padding:5vh 4cqw 5vh 20cqw;border-top:1px solid #111">
+    <p style="margin:0;max-width:260px;font:400 15px/1.5 'Instrument Sans',sans-serif;color:#3A3A37;order:1">Beatmatch de ouvido, frases, EQ e transições limpas — a base que não depende de botão.</p>
+    <span style="font:200 clamp(44px,7cqw,120px)/1 'Archivo',sans-serif;font-stretch:125%;letter-spacing:-.04em;order:2">TECHNIQUE</span>
+    <span style="font:500 12px/1 'JetBrains Mono',monospace;letter-spacing:.14em;order:3;padding:8px 10px;background:var(--acc,#D6FF3D)">02</span>
+  </div>
+  <div data-reveal="0" style="position:relative;display:flex;align-items:center;gap:4cqw;flex-wrap:wrap;padding:6vh 4cqw;border-top:1px solid #111;overflow:hidden">
+    <span aria-hidden="true" style="position:absolute;right:2cqw;top:50%;transform:translateY(-50%);font:900 clamp(120px,24cqw,400px)/.8 'Archivo',sans-serif;font-stretch:62%;color:#F2F2EF;z-index:0">03</span>
+    <div style="position:relative;z-index:1;width:clamp(120px,14cqw,200px);aspect-ratio:1/1;transition:transform .6s cubic-bezier(.2,.7,.1,1)" style-hover="transform:rotate(-4deg) scale(1.05)">
+      <image-slot id="value-music" shape="rect" placeholder="Crate digging" style="width:100%;height:100%"></image-slot>
+    </div>
+    <div style="position:relative;z-index:1;display:flex;flex-direction:column;gap:14px">
+      <span style="font:900 clamp(52px,9cqw,150px)/.85 'Archivo',sans-serif;font-stretch:62%;letter-spacing:-.01em">MUSIC</span>
+      <p style="margin:0;max-width:340px;font:400 15px/1.5 'Instrument Sans',sans-serif;color:#3A3A37">Pesquisa, curadoria e biblioteca. Seu repertório é sua assinatura.</p>
+    </div>
+  </div>
+  <div data-reveal="0" style="display:flex;flex-direction:column;align-items:center;gap:2vh;padding:8vh 4cqw 4vh;border-top:1px solid #111;border-bottom:1px solid #111">
+    <span style="font:500 11px/1 'JetBrains Mono',monospace;letter-spacing:.14em">04 / PERFORMANCE</span>
+    <span style="font:900 clamp(40px,10.5cqw,190px)/.85 'Archivo',sans-serif;font-stretch:125%;letter-spacing:-.05em;transition:letter-spacing .6s cubic-bezier(.2,.7,.1,1),font-weight .6s" style-hover="letter-spacing:-.02em;font-weight:300">PERFORM</span>
+    <p style="margin:0;max-width:420px;text-align:center;font:400 15px/1.5 'Instrument Sans',sans-serif;color:#3A3A37">Presença, leitura de pista e controle de energia — o que separa quem mixa de quem toca.</p>
+  </div>
+</section>
+
+<section id="aulas" data-sec="03 / Formats" data-screen-label="03 Aulas" style="position:relative;padding:16vh 4cqw;overflow:clip">
+  <div aria-hidden="true" style="position:absolute;right:-2cqw;bottom:-6vh;font:900 42cqw/.8 'Archivo',sans-serif;font-stretch:62%;color:#EEEEEA;z-index:0;transition:opacity .4s">{{ lessonNum }}</div>
+  <h2 style="position:relative;margin:0 0 10vh;display:flex;flex-direction:column;gap:1vh">
+    <span data-reveal="0" style="font:500 11px/1 'JetBrains Mono',monospace;letter-spacing:.14em;margin-bottom:3vh">03 — FORMATS</span>
+    <span data-reveal="0" style="font:300 clamp(40px,6cqw,104px)/.95 'Archivo',sans-serif;font-stretch:125%;letter-spacing:-.04em">HOW DO YOU</span>
+    <span data-reveal="100" style="font:900 clamp(56px,10cqw,176px)/.85 'Archivo',sans-serif;font-stretch:62%;padding-left:14cqw">WANT TO LEARN?</span>
+  </h2>
+  <div style="position:relative;display:flex;flex-wrap:wrap;gap:5cqw;align-items:flex-start">
+    <div style="flex:1 1 520px;border-top:1px solid #111" onMouseLeave="{{ noop }}">
+      <sc-for list="{{ lessons }}" as="l" hint-placeholder-count="6">
+        <div onMouseEnter="{{ l.enter }}" onClick="{{ l.enter }}" data-hover="1" style="position:relative;display:flex;align-items:center;gap:2.4cqw;padding:2.6vh 0;border-bottom:1px solid rgba(17,17,17,.14);cursor:pointer">
+          <span style="font:500 11px/1 'JetBrains Mono',monospace;letter-spacing:.12em;width:28px;flex:none">{{ l.n }}</span>
+          <div style="display:flex;flex-direction:column;gap:8px;transform:{{ l.shift }};transition:transform .6s cubic-bezier(.2,.7,.1,1)">
+            <span style="font:{{ l.weight }} clamp(26px,3.6cqw,58px)/1 'Archivo',sans-serif;font-stretch:{{ l.stretch }};letter-spacing:-.03em;color:{{ l.color }};transition:color .4s">{{ l.name }}</span>
+            <span style="font:500 11px/1.3 'JetBrains Mono',monospace;letter-spacing:.1em;color:#5E5E5A;opacity:{{ l.metaOp }};transition:opacity .4s">{{ l.meta }}</span>
+          </div>
+          <span style="margin-left:auto;font:400 22px/1 'JetBrains Mono',monospace;opacity:{{ l.metaOp }};transform:{{ l.arrow }};transition:transform .5s,opacity .4s">→</span>
+          <span aria-hidden="true" style="position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:#111;transform-origin:left;transform:{{ l.line }};transition:transform .7s cubic-bezier(.2,.7,.1,1)"></span>
+        </div>
+      </sc-for>
+    </div>
+    <div style="flex:0 1 min(34cqw,460px);min-width:260px;position:sticky;top:14vh">
+      <div style="position:relative;aspect-ratio:3/4;overflow:hidden;background:#EDEDEA">
+        <sc-for list="{{ lessons }}" as="l" hint-placeholder-count="1">
+          <div style="position:absolute;inset:0;opacity:{{ l.imgOp }};clip-path:{{ l.clip }};transition:opacity .5s,clip-path .9s cubic-bezier(.77,0,.18,1)">
+            <image-slot id="{{ l.id }}" shape="rect" placeholder="{{ l.ph }}" style="width:100%;height:100%"></image-slot>
+          </div>
+        </sc-for>
+        <div style="position:absolute;left:0;top:0;padding:10px 12px;background:var(--acc,#D6FF3D);font:500 11px/1 'JetBrains Mono',monospace;letter-spacing:.12em;pointer-events:none">{{ lessonNum }} / 06</div>
+      </div>
+      <p style="margin:18px 0 0;font:400 16px/1.5 'Instrument Sans',sans-serif;max-width:380px;text-wrap:pretty">{{ lessonDesc }}</p>
+    </div>
+  </div>
+</section>
+
+<section id="conteudo" data-sec="04 / Curriculum" data-screen-label="04 Conteúdo" style="position:relative;padding:14vh 4cqw 18vh;background:#fff;border-top:1px solid rgba(17,17,17,.12)">
+  <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:8vh">
+    <h2 style="margin:0;display:flex;flex-direction:column">
+      <span data-reveal="0" style="font:500 11px/1 'JetBrains Mono',monospace;letter-spacing:.14em;margin-bottom:3vh">04 — CURRICULUM</span>
+      <span data-reveal="0" style="font:900 clamp(56px,9cqw,160px)/.85 'Archivo',sans-serif;font-stretch:125%;letter-spacing:-.05em">10 MODULES.</span>
+      <span data-reveal="80" style="font:200 clamp(28px,3.6cqw,64px)/1 'Archivo',sans-serif;font-stretch:125%;letter-spacing:-.03em;padding-left:8cqw">ONE BOOTH.</span>
+    </h2>
+    <p style="margin:0;max-width:300px;font:400 15px/1.5 'Instrument Sans',sans-serif;color:#3A3A37">Do primeiro play ao soundcheck do clube. Selecione um módulo.</p>
+  </div>
+  <div style="display:flex;flex-wrap:wrap-reverse;gap:5cqw;align-items:flex-start">
+    <div style="flex:0 1 min(38cqw,540px);min-width:260px;position:sticky;top:12vh">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between">
+        <span style="font:900 clamp(120px,17cqw,280px)/.78 'Archivo',sans-serif;font-stretch:62%;letter-spacing:-.02em">{{ modNum }}</span>
+        <span style="font:500 11px/1.6 'JetBrains Mono',monospace;letter-spacing:.12em;text-align:right">MODULE<br>{{ modNum }} / 10</span>
+      </div>
+      <div style="position:relative;aspect-ratio:5/4;margin-top:3vh;overflow:hidden;background:#EDEDEA">
+        <image-slot id="module-04-dj-fixed" src="assets/module-04-dj-color.jpg" shape="rect" fit="cover" placeholder="DJ tocando em uma cabine iluminada" style="position:absolute;inset:0;width:100%;height:100%;z-index:0"></image-slot>
+        <sc-for list="{{ modules }}" as="m" hint-placeholder-count="1">
+          <div style="position:absolute;inset:0;opacity:{{ m.imgOp }};transform:{{ m.imgScale }};transition:opacity .6s,transform 1.2s cubic-bezier(.2,.7,.1,1)">
+            <image-slot id="{{ m.id }}" shape="rect" placeholder="{{ m.ph }}" style="width:100%;height:100%"></image-slot>
+          </div>
+        </sc-for>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:12px;margin-top:12px;font:500 10px/1.4 'JetBrains Mono',monospace;letter-spacing:.12em"><span>GEAR — {{ modGear }}</span><span>{{ modTitle }}</span></div>
+    </div>
+    <div style="flex:1 1 480px;border-top:1px solid #111">
+      <sc-for list="{{ modules }}" as="m" hint-placeholder-count="10">
+        <div style="border-bottom:1px solid rgba(17,17,17,.16)">
+          <button onClick="{{ m.pick }}" aria-expanded="{{ m.open }}" style="width:100%;display:flex;align-items:center;gap:2cqw;padding:22px 0;background:none;border:0;cursor:pointer;text-align:left;color:#111">
+            <span style="font:500 11px/1 'JetBrains Mono',monospace;letter-spacing:.12em;width:28px;padding:5px 0;background:{{ m.tagBg }};text-align:center;transition:background .3s">{{ m.n }}</span>
+            <span style="font:{{ m.weight }} clamp(22px,2.6cqw,40px)/1 'Archivo',sans-serif;font-stretch:115%;letter-spacing:-.02em;transition:letter-spacing .5s" style-hover="letter-spacing:.01em">{{ m.title }}</span>
+            <span style="margin-left:auto;font:300 26px/1 'JetBrains Mono',monospace;transform:{{ m.rot }};transition:transform .5s">+</span>
+          </button>
+          <div style="display:grid;grid-template-rows:{{ m.rows }};transition:grid-template-rows .6s cubic-bezier(.2,.7,.1,1)">
+            <div style="overflow:hidden">
+              <div style="display:flex;flex-wrap:wrap;gap:16px 4cqw;padding:0 0 28px calc(28px + 2cqw)">
+                <p style="margin:0;flex:1 1 260px;max-width:420px;font:400 16px/1.5 'Instrument Sans',sans-serif;text-wrap:pretty">{{ m.desc }}</p>
+                <div style="display:flex;flex-direction:column;gap:6px;font:500 11px/1.4 'JetBrains Mono',monospace;letter-spacing:.1em;color:#5E5E5A"><span>EQUIPAMENTO</span><span style="color:#111">{{ m.gear }}</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section id="equipamentos" data-sec="05 / Gear" data-screen-label="05 Equipamentos" style="position:relative;min-height:170vh;padding:14vh 4cqw;background:#EFEFEC;overflow:hidden">
+  <div aria-hidden="true" style="position:absolute;inset:0;background:radial-gradient(60% 40% at 70% 40%,#fff,transparent)"></div>
+  <h2 style="position:relative;z-index:1;margin:0;display:flex;flex-direction:column">
+    <span data-reveal="0" style="font:500 11px/1 'JetBrains Mono',monospace;letter-spacing:.14em;margin-bottom:4vh">05 — PIONEER DJ / ALPHATHETA</span>
+    <span data-xspeed="-0.25" style="font:900 clamp(96px,24cqw,420px)/.78 'Archivo',sans-serif;font-stretch:62%;letter-spacing:-.02em">LEARN</span>
+    <span data-xspeed="0.18" style="font:200 clamp(36px,7cqw,124px)/1 'Archivo',sans-serif;font-stretch:125%;letter-spacing:-.04em;padding-left:22cqw">ON REAL GEAR<span style="color:#111;background:var(--acc,#D6FF3D);padding:0 .08em">.</span></span>
+  </h2>
+  <div style="position:relative;z-index:2;height:120vh;margin-top:4vh">
+    <div data-speed="-0.1" style="position:absolute;left:4cqw;top:2vh;width:min(46cqw,640px)">
+      <div style="transform:rotate(-6deg);aspect-ratio:4/3;filter:drop-shadow(0 50px 50px rgba(0,0,0,.18))">
+        <image-slot id="gear-cdj" shape="rect" fit="contain" placeholder="CDJ-3000 — recortado, fundo branco" style="width:100%;height:100%"></image-slot>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;margin:18px 0 0 30%;font:500 11px/1.5 'JetBrains Mono',monospace;letter-spacing:.1em"><span style="display:block;width:8px;height:8px;border-radius:50%;background:#111"></span><span style="display:block;width:60px;height:1px;background:#111"></span><span>CDJ-3000 — MULTI PLAYER<br>G.01 / x2 POR CABINE</span></div>
+    </div>
+    <div data-speed="0.08" style="position:absolute;right:-6cqw;top:10vh;width:min(40cqw,560px)">
+      <div style="transform:rotate(8deg);aspect-ratio:1/1;filter:drop-shadow(0 50px 50px rgba(0,0,0,.18))">
+        <image-slot id="gear-djm" shape="rect" fit="cover" placeholder="DJM-A9 — mixer, top view" style="width:100%;height:100%"></image-slot>
+      </div>
+      <div style="margin:10px 0 0 10%;font:500 11px/1.5 'JetBrains Mono',monospace;letter-spacing:.1em">DJM-A9 — 4CH MIXER<br>G.02</div>
+    </div>
+    <div data-speed="-0.06" style="position:absolute;left:38cqw;top:86vh;width:min(32cqw,460px);z-index:3">
+      <div style="transform:rotate(-14deg);aspect-ratio:1/1;filter:drop-shadow(0 40px 40px rgba(0,0,0,.2))">
+        <img src="assets/headphones-hdj-cue1.jpg" alt="Fone Pioneer HDJ-CUE1" style="display:block;width:100%;height:100%;object-fit:contain;filter:grayscale(1) contrast(1.04)">
+      </div>
+      <div style="margin:32px 0 0 22%;font:500 11px/1.5 'JetBrains Mono',monospace;letter-spacing:.1em">HDJ — MONITOR<br>G.03</div>
+    </div>
+    <div style="position:absolute;left:-4cqw;top:46vh;height:min(96vh,170cqw);aspect-ratio:941/1672;z-index:2;pointer-events:none">
+      <img src="assets/dj-lean.jpg" alt="Aluno encostado no canto da parede, fones no pescoço" style="display:block;width:100%;height:100%;object-fit:contain;object-position:left bottom;filter:var(--photo,grayscale(1) contrast(1.05))">
+      <div style="position:absolute;left:52%;top:31%;display:flex;align-items:center;gap:10px;font:500 11px/1.5 'JetBrains Mono',monospace;letter-spacing:.1em;white-space:nowrap"><span style="display:block;width:8px;height:8px;border-radius:50%;background:#111"></span><span style="display:block;width:4cqw;height:1px;background:#111"></span><span>FIG. 05 — THE CORNER<br>WAITING FOR THE DROP</span></div>
+    </div>
+  </div>
+  <div style="position:relative;z-index:3;margin:6vh 0 0 auto;max-width:300px;display:flex;flex-direction:column;gap:16px">
+    <p data-reveal="0" style="margin:0;font:400 16px/1.5 'Instrument Sans',sans-serif;text-wrap:pretty">Você aprende no mesmo padrão que vai encontrar no booth. Nada de adaptar depois.</p>
+    <div style="display:flex;justify-content:space-between;font:500 10px/1 'JetBrains Mono',monospace;letter-spacing:.12em;border-top:1px solid #111;padding-top:10px"><span>CLUB STANDARD</span><span>2 CABINES</span></div>
+  </div>
+</section>
+
+<section id="galeria" ref="{{ galRef }}" data-sec="06 / Session" data-screen-label="06 Galeria" style="position:relative;height:340vh;background:#F7F7F5">
+  <div style="position:sticky;top:0;height:100vh;overflow:hidden">
+    <div ref="{{ galWordRef }}" aria-hidden="true" style="position:absolute;left:0;top:50%;margin-top:-17cqw;font:900 36cqw/.9 'Archivo',sans-serif;font-stretch:125%;letter-spacing:-.06em;color:transparent;-webkit-text-stroke:1px rgba(17,17,17,.14);white-space:nowrap">SOUND · CULTURE</div>
+    <div style="position:absolute;left:4cqw;top:13vh;z-index:3;display:flex;gap:14px;align-items:center;font:500 11px/1 'JetBrains Mono',monospace;letter-spacing:.14em"><span>06</span><span style="display:block;width:48px;height:1px;background:#111"></span><span>PHOTO SESSION — SS26</span></div>
+    <div ref="{{ trackRef }}" style="position:absolute;left:0;top:0;height:100%;display:flex;align-items:flex-start;gap:5cqw;padding:0 8cqw 0 30cqw;will-change:transform">
+      <div style="flex:none;width:34cqw;min-width:240px;margin-top:22vh"><div style="height:62vh;overflow:hidden;background:#111"><image-slot id="gal-color-purple" src="assets/color-purple-dj.jpg" shape="rect" fit="cover" placeholder="DJ em performance com iluminação colorida" style="width:100%;height:100%;filter:saturate(.82)"></image-slot></div><div style="margin-top:10px;font:500 10px/1 'JetBrains Mono',monospace;letter-spacing:.12em">FIG. 01 — SELECTOR</div></div>
+      <div style="flex:none;width:16cqw;min-width:150px;margin-top:58vh"><div style="aspect-ratio:1/1;overflow:hidden;background:#111"><image-slot id="gal-color-rooftop" src="assets/color-rooftop-cdj.jpg" shape="rect" fit="cover" placeholder="Setup de DJ em rooftop" style="width:100%;height:100%;filter:saturate(.78)"></image-slot></div><div style="margin-top:10px;font:500 10px/1 'JetBrains Mono',monospace;letter-spacing:.12em">FIG. 02 — BOOTH</div></div>
+      <div style="flex:none;position:relative;width:26cqw;min-width:200px;margin-top:12vh">
+        <div style="position:relative;height:50vh;overflow:visible;background:#111"><img src="assets/color-sunset-female-dj.jpg" alt="DJ em performance ao pôr do sol" style="display:block;width:100%;height:100%;object-fit:cover;object-position:center;filter:saturate(.82)"><div style="position:absolute;left:-6cqw;bottom:-3cqw;z-index:4;display:flex;flex-direction:column;gap:0;font:900 clamp(48px,6cqw,96px)/.85 'Archivo',sans-serif;font-stretch:62%;letter-spacing:-.04em;pointer-events:none"><span>PLAY</span><span style="color:transparent;-webkit-text-stroke:1.5px #111">MIX</span><span style="background:var(--acc,#D6FF3D);align-self:flex-start;padding:0 6px">CUE</span></div></div>
+        <div style="position:absolute;right:-8cqw;bottom:-18vh;width:60%;aspect-ratio:3/4;overflow:hidden;box-shadow:0 30px 60px -30px rgba(0,0,0,.4)"><img src="assets/color-smoke-dj.jpg" alt="DJ em meio à fumaça e luzes coloridas" style="display:block;width:100%;height:100%;object-fit:cover;object-position:center;filter:saturate(.8)"></div>
+      </div>
+      <div style="flex:none;position:relative;z-index:2;height:94vh;aspect-ratio:1101/1429;margin-top:6vh;margin-right:-12cqw;pointer-events:none">
+        <img src="assets/dj-sit.jpg" alt="DJ sentado, relaxado" style="display:block;width:100%;height:100%;object-fit:contain;object-position:bottom;filter:var(--photo,grayscale(1) contrast(1.05))">
+        <div style="position:absolute;left:4%;top:12%;font:500 10px/1.5 'JetBrains Mono',monospace;letter-spacing:.12em">FIG. 06 — OFF DUTY<br>BETWEEN SETS</div>
+      </div>
+      <div style="flex:none;width:44cqw;min-width:280px;margin-top:8vh"><div style="height:84vh;overflow:hidden;background:#111;box-shadow:0 30px 70px -35px rgba(0,0,0,.45)"><img src="assets/ambient-female-stage-color.jpg" alt="DJ da Only DjayZ tocando diante do público" style="display:block;width:100%;height:100%;object-fit:cover;object-position:center;filter:saturate(.94)"></div></div>
+      <div style="flex:none;width:18cqw;min-width:160px;margin-top:40vh"><div style="aspect-ratio:3/4"><image-slot id="gal-6" shape="rect" placeholder="Alunos no LAB" style="width:100%;height:100%"></image-slot></div><div style="margin-top:10px;font:500 10px/1 'JetBrains Mono',monospace;letter-spacing:.12em">FIG. 06 — LAB</div></div>
+      <div style="flex:none;width:28cqw;min-width:220px;margin-top:18vh"><div style="height:44vh;overflow:hidden;background:#111;box-shadow:0 30px 70px -35px rgba(0,0,0,.45)"><img src="assets/ambient-female-crowd-joy-color.jpg" alt="DJ da Only DjayZ celebrando diante do público" style="display:block;width:100%;height:100%;object-fit:cover;object-position:center;filter:saturate(.94)"></div><div style="margin-top:10px;font:500 10px/1 'JetBrains Mono',monospace;letter-spacing:.12em">FIG. 07 — LIVE SET</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="experiencia" ref="{{ storyRef }}" data-sec="07 / Journey" data-screen-label="07 Experiência" style="position:relative;height:460vh;background:#0E0E0E;color:#F7F7F5">
+  <div style="position:sticky;top:0;height:100vh;overflow:hidden;padding:13vh 4cqw 6vh;display:flex;flex-direction:column;justify-content:space-between">
+    <div data-speed="0.04" aria-hidden="true" style="position:absolute;right:-5cqw;bottom:0;height:min(90vh,130cqw);aspect-ratio:1101/1429;z-index:0;pointer-events:none;opacity:{{ profileOp }};transition:opacity .8s">
+      <img src="assets/dj-profile-dark.jpg" alt="" style="display:block;width:100%;height:100%;object-fit:contain;object-position:bottom right;filter:var(--photo,grayscale(1) contrast(1.05))">
+      <div style="position:absolute;inset:0;background:linear-gradient(90deg,#0E0E0E 0%,transparent 22%)"></div>
+    </div>
+    <div style="position:relative;z-index:1;display:flex;flex-direction:column;gap:3vh">
+      <span style="font:500 11px/1.6 'JetBrains Mono',monospace;letter-spacing:.14em;color:#B8B8B4">07 — THE JOURNEY · {{ stepNum }} / 05</span>
+      <div style="display:flex;flex-direction:column">
+        <span style="font:200 clamp(24px,2.6cqw,44px)/1 'Archivo',sans-serif;font-stretch:125%">FROM</span>
+        <span style="font:900 clamp(56px,9cqw,160px)/.82 'Archivo',sans-serif;font-stretch:62%;opacity:{{ bedroomOp }};transition:opacity .6s">BEDROOM</span>
+      </div>
+    </div>
+    <div style="position:relative;z-index:1;display:flex;flex-direction:column;gap:1vh;max-width:min(54cqw,720px)">
+      <span style="font:900 clamp(96px,15cqw,260px)/.76 'Archivo',sans-serif;font-stretch:62%;color:var(--acc,#D6FF3D)">{{ stepNum }}</span>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <span style="font:800 clamp(34px,4.6cqw,80px)/.9 'Archivo',sans-serif;font-stretch:125%;letter-spacing:-.04em">{{ stepWord }}</span>
+        <p style="margin:0;max-width:380px;font:400 16px/1.5 'Instrument Sans',sans-serif;color:#CFCFCB">{{ stepText }}</p>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:22px">
+      <div style="position:relative;height:1px;background:rgba(247,247,245,.2)"><div ref="{{ barRef }}" style="position:absolute;inset:0;background:var(--acc,#D6FF3D);transform-origin:left;transform:scaleX(0)"></div></div>
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;align-items:flex-end">
+        <div style="display:flex;flex-wrap:wrap;gap:10px 28px;font:500 11px/1 'JetBrains Mono',monospace;letter-spacing:.12em">
+          <sc-for list="{{ steps }}" as="s" hint-placeholder-count="5"><span style="color:{{ s.color }};transition:color .4s">{{ s.n }} {{ s.word }} →</span></sc-for>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end">
+          <span style="font:200 clamp(24px,2.6cqw,44px)/1 'Archivo',sans-serif;font-stretch:125%">TO</span>
+          <span style="font:900 clamp(56px,9cqw,160px)/.82 'Archivo',sans-serif;font-stretch:62%;opacity:{{ boothOp }};transition:opacity .6s">BOOTH<span style="color:var(--acc,#D6FF3D)">.</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="professor" data-sec="08 / Professor" data-screen-label="08 O Professor" style="position:relative;padding:16vh 4cqw;background:#fff;border-top:1px solid rgba(17,17,17,.12);overflow:hidden">
+  <div data-reveal="0" style="display:flex;align-items:center;gap:14px;font:500 11px/1 'JetBrains Mono',monospace;letter-spacing:.14em;margin-bottom:6vh;position:relative"><span>08</span><span style="display:block;width:6cqw;height:1px;background:#111"></span><span>O PROFESSOR</span></div>
+  <div style="display:flex;flex-wrap:wrap;gap:7cqw;align-items:flex-start;position:relative">
+    <div data-reveal="0" style="flex:1 1 280px;max-width:420px;aspect-ratio:3/4;filter:var(--photo,grayscale(1))"><img src="assets/professor-only-djayz-seated.jpg" alt="Professor da Only DjayZ sentado" style="display:block;width:100%;height:100%;object-fit:contain;object-position:center bottom"></div>
+    <div style="flex:1 1 420px;max-width:600px;padding-top:5vh">
+      <h3 data-reveal="140" style="margin:4vh 0 2.4vh -.22em;font:800 clamp(34px,4.2cqw,62px)/.96 'Archivo',sans-serif;letter-spacing:-.045em">Eu sou o Bitran</h3>
+      <p data-reveal="180" style="margin:0 0 0 1.1em;max-width:500px;font:400 clamp(18px,1.7cqw,24px)/1.45 'Instrument Sans',sans-serif">e serei seu mentor.<br><br>Tenho mais de 25 anos ensinando alunos a entender como a música transforma.<br><br>Sou DJ e produtor musical e estarei aqui para apoiá-lo nesta jornada.</p>
+      <div data-reveal="120" style="display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:28px;font:500 11px/1.4 'JetBrains Mono',monospace;letter-spacing:.1em;color:#5E5E5A"> <span>ESCUTA</span><span>/</span><span>TÉCNICA</span><span>/</span><span>PISTA</span><span>/</span><span>CONFIANÇA</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="contato" data-sec="09 / Contact" data-screen-label="09 Contato" style="position:relative;padding:18vh 4cqw 0;background:#F7F7F5;overflow:hidden">
+  <div class="contact-layout" style="display:flex;flex-wrap:wrap;gap:6cqw;align-items:flex-start">
+    <div class="contact-copy" style="flex:1 1 520px;display:flex;flex-direction:column">
+    <h2 style="margin:0;display:flex;flex-direction:column">
+      <span data-reveal="0" style="font:500 11px/1 'JetBrains Mono',monospace;letter-spacing:.14em;margin-bottom:4vh">09 — ENROLL</span>
+      <span data-reveal="0" style="font:900 clamp(72px,11cqw,180px)/.78 'Archivo',sans-serif;font-stretch:125%;letter-spacing:-.06em;white-space:nowrap">READY</span>
+      <span data-reveal="100" style="font:900 clamp(48px,7cqw,120px)/.9 'Archivo',sans-serif;font-stretch:62%;color:transparent;-webkit-text-stroke:1.5px #111;padding-left:8cqw;white-space:nowrap">TO PLAY?</span>
+    </h2>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-top:6vh;padding-left:12cqw;font:500 10px/1.6 'JetBrains Mono',monospace;letter-spacing:.12em"><span style="display:block;width:40px;height:1px;background:#111"></span><span>NEXT UP —<br>YOU.</span></div>
+    <div class="contact-visual" data-reveal="120" style="width:28cqw;max-width:360px;margin:-14vh 0 0 17cqw;align-self:flex-start;filter:var(--photo,grayscale(1))"><img src="assets/dj-female-flx4-wall-profile.jpg" alt="DJ da Only DjayZ agachada ao lado da cabine" style="display:block;width:100%;height:auto;object-fit:contain"></div>
+    </div>
+    <div class="contact-form" style="flex:1 1 360px;max-width:520px;padding-top:14vh">
+      <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+        <form onSubmit="{{ submit }}" style="display:flex;flex-direction:column;gap:30px" inert aria-describedby="preview-form-notice">
+          <p id="preview-form-notice" style="font:500 12px/1.5 'JetBrains Mono',monospace">PRÉVIA: o formulário ainda não recebe nem salva dados.</p>
+          <label style="display:flex;flex-direction:column;gap:6px;font:500 11px/1 'JetBrains Mono',monospace;letter-spacing:.14em">01 — NOME
+            <input name="nome" required="required" autocomplete="name" style="border:0;border-bottom:1px solid #111;background:transparent;padding:12px 0;font:400 22px/1.2 'Instrument Sans',sans-serif;color:#111;outline:none;border-radius:0" style-focus="border-bottom:2px solid #111">
+          </label>
+          <label style="display:flex;flex-direction:column;gap:6px;font:500 11px/1 'JetBrains Mono',monospace;letter-spacing:.14em">02 — WHATSAPP
+            <input name="whats" type="tel" required="required" autocomplete="tel" style="border:0;border-bottom:1px solid #111;background:transparent;padding:12px 0;font:400 22px/1.2 'Instrument Sans',sans-serif;color:#111;outline:none;border-radius:0" style-focus="border-bottom:2px solid #111">
+          </label>
+          <label style="display:flex;flex-direction:column;gap:6px;font:500 11px/1 'JetBrains Mono',monospace;letter-spacing:.14em">03 — E-MAIL
+            <input name="email" type="email" required="required" autocomplete="email" style="border:0;border-bottom:1px solid #111;background:transparent;padding:12px 0;font:400 22px/1.2 'Instrument Sans',sans-serif;color:#111;outline:none;border-radius:0" style-focus="border-bottom:2px solid #111">
+          </label>
+          <fieldset style="border:0;margin:0;padding:0;display:flex;flex-direction:column;gap:14px">
+            <legend style="padding:0;margin-bottom:14px;font:500 11px/1 'JetBrains Mono',monospace;letter-spacing:.14em">04 — QUAL SEU NÍVEL?</legend>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:6px">
+              <sc-for list="{{ levels }}" as="lv" hint-placeholder-count="4">
+                <button type="button" onClick="{{ lv.pick }}" aria-pressed="{{ lv.on }}" style="height:52px;border:1px solid #111;background:{{ lv.bg }};color:#111;font:500 12px/1 'JetBrains Mono',monospace;letter-spacing:.06em;cursor:pointer;transition:background .3s">{{ lv.label }}</button>
+              </sc-for>
+            </div>
+          </fieldset>
+          <button type="submit" data-magnetic="1" style="display:flex;align-items:center;justify-content:space-between;height:72px;padding:0 26px;border:0;background:#111;color:#F7F7F5;font:600 13px/1 'JetBrains Mono',monospace;letter-spacing:.12em;cursor:pointer;transition:background .3s,color .3s" style-hover="background:var(--acc,#D6FF3D);color:#111"><span>QUERO CONHECER A ONLY DJAYZ</span><span style="font-size:20px">→</span></button>
+        </form>
+      </sc-if>
+      <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:18px;padding:6vh 0;border-top:1px solid #111">
+          <span style="font:500 11px/1 'JetBrains Mono',monospace;letter-spacing:.14em">STATUS — RECEIVED</span>
+          <span style="font:900 clamp(40px,5cqw,80px)/.9 'Archivo',sans-serif;font-stretch:125%;letter-spacing:-.04em">CUE SET<span style="background:var(--acc,#D6FF3D)">.</span></span>
+          <p style="margin:0;font:400 17px/1.5 'Instrument Sans',sans-serif;max-width:360px">Esta prévia ainda não recebe inscrições. Valores, calendário e pedidos de vaga serão habilitados após a validação.</p>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;margin-top:16vh;border-top:1px solid #111">
+    <a href="https://instagram.com/" style="display:flex;flex-direction:column;gap:10px;padding:26px 20px 26px 0;border-bottom:1px solid rgba(17,17,17,.14);transition:padding .4s" style-hover="padding-left:14px"><span style="font:500 10px/1 'JetBrains Mono',monospace;letter-spacing:.14em;color:#5E5E5A">INSTAGRAM</span><span style="font:500 18px/1.2 'Instrument Sans',sans-serif">@onlydjayz ↗</span></a>
+    <div><span>WHATSAPP</span><span>Contato em preparação</span></div>
+    <a href="mailto:contato em preparação" style="display:flex;flex-direction:column;gap:10px;padding:26px 20px 26px 0;border-bottom:1px solid rgba(17,17,17,.14);transition:padding .4s" style-hover="padding-left:14px"><span style="font:500 10px/1 'JetBrains Mono',monospace;letter-spacing:.14em;color:#5E5E5A">E-MAIL</span><span style="font:500 18px/1.2 'Instrument Sans',sans-serif">contato em preparação ↗</span></a>
+  </div>
+  <footer style="position:relative;padding:8vh 0 0">
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px;font:500 10px/1.6 'JetBrains Mono',monospace;letter-spacing:.12em">
+      <div style="width:120px;height:105px;overflow:hidden;mix-blend-mode:multiply"><img src="assets/logo.png" alt="ONLY.DJAYZ" style="display:block;width:255px;max-width:none;margin:-75px 0 0 -68px;filter:invert(1) contrast(4)"></div>
+      <span>© 2026 ONLY DJAYZ — DJ SCHOOL<br>MUSIC / CULTURE / PERFORMANCE</span>
+      <a href="#top" onClick="{{ goTop }}" style="border-bottom:1px solid #111;padding-bottom:4px">↑ BACK TO TOP</a>
+    </div>
+    <div aria-hidden="true" data-speed="0.06" style="font:900 23.5cqw/.8 'Archivo',sans-serif;font-stretch:125%;letter-spacing:-.06em;white-space:nowrap;margin:4vh 0 -5cqw -1cqw">ONLY DJAYZ</div>
+  </footer>
+</section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;accent&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Acid lime&quot;,&quot;Digital orange&quot;,&quot;Electric blue&quot;],&quot;default&quot;:&quot;Acid lime&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Brand&quot;},&quot;photo&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Mono&quot;,&quot;Color&quot;],&quot;default&quot;:&quot;Mono&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Brand&quot;},&quot;motion&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:0,&quot;max&quot;:2,&quot;step&quot;:0.1,&quot;default&quot;:1,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Motion&quot;}}">
+const LESSONS = [
+  { name: 'AULAS INDIVIDUAIS', meta: '1:1 · RITMO PRÓPRIO · PLANO SOB MEDIDA', desc: 'Professor e cabine só para você. O plano acompanha seu ritmo, seu gênero e seu objetivo.', ph: 'Aula 1:1 — professor + aluno' },
+  { name: 'AULAS EM DUPLA', meta: '2 ALUNOS · B2B · CUSTO DIVIDIDO', desc: 'Aprenda com um parceiro de cabine. Ideal para quem quer tocar back-to-back.', ph: 'Dupla na cabine — b2b' },
+  { name: 'WORKSHOPS', meta: 'GRUPOS · 1 DIA · TEMA INTENSIVO', desc: 'Imersões de um dia em um tema: harmonic mixing, rekordbox, performance com FX.', ph: 'Workshop — grupo' },
+  { name: 'MASTERCLASSES', meta: 'CONVIDADOS · VAGAS LIMITADAS', desc: 'DJs da cena abrem o processo: seleção, preparo de set e rotina de carreira.', ph: 'Masterclass — DJ convidado' },
+  { name: 'MENTORIA', meta: 'CARREIRA · IDENTIDADE · POSICIONAMENTO', desc: 'Acompanhamento para quem já toca: identidade sonora, repertório, press kit e booking.', ph: 'Mentoria — conversa no estúdio' },
+  { name: 'PRÁTICA LIVRE / LAB', meta: 'HORAS DE CABINE · EQUIPAMENTO LIBERADO', desc: 'Reserve a cabine e treine no setup de clube, com monitor de plantão.', ph: 'LAB — cabine vazia, luz de clube' }
+];
+const MODULES = [
+  ['INTRO TO DJING', 'Anatomia do setup, fluxo de sinal e o papel do DJ na pista.', 'CDJ + DJM'],
+  ['BEATMATCH', 'Sincronizar de ouvido: pitch, jog, contagem de tempos e frases.', 'CDJ-3000'],
+  ['MIXING', 'Blends longos, cortes, transições e controle de energia.', 'DJM-A9'],
+  ['EQ & FILTERS', 'Esculpir frequências sem perder o groove. Graves que não brigam.', 'DJM — EQ / COLOR FX'],
+  ['HOT CUES', 'Marcações, estrutura da faixa e performance ao vivo com pads.', 'CDJ — HOT CUE PADS'],
+  ['LOOPS', 'Loops, roll e extensões criativas para construir tensão.', 'CDJ / DDJ'],
+  ['MUSIC LIBRARY', 'Digging, tags, playlists, rekordbox e preparo do pendrive.', 'REKORDBOX'],
+  ['SET CONSTRUCTION', 'Curva de energia, narrativa e leitura de pista.', 'SETUP COMPLETO'],
+  ['PERFORMANCE', 'Presença, postura de cabine e gestão de imprevistos.', 'CLUB BOOTH'],
+  ['CLUB PREPARATION', 'Rider técnico, soundcheck, abertura e fechamento de noite.', 'BOOTH + MONITOR']
+];
+const STEPS = [
+  ['APRENDER', 'Fundamentos de técnica e equipamento, desde a primeira aula no setup de clube.'],
+  ['PRATICAR', 'Horas de cabine no LAB, com feedback de quem toca toda semana.'],
+  ['REPERTÓRIO', 'Digging e biblioteca: uma coleção que soa como você.'],
+  ['IDENTIDADE', 'Som, estética e narrativa próprios. O que faz alguém lembrar do seu set.'],
+  ['TOCAR', 'Da primeira gravação ao primeiro booth. Pista cheia.']
+];
+const LEVELS = ['Nunca toquei', 'Iniciante', 'Intermediário', 'DJ'];
+const LINKS = [['SOBRE', 'sobre'], ['O PROFESSOR', 'professor'], ['AULAS', 'aulas'], ['CONTEÚDO', 'conteudo'], ['EQUIPAMENTOS', 'equipamentos'], ['GALERIA', 'galeria'], ['CONTATO', 'contato']];
+const ACC = { 'Acid lime': '#D6FF3D', 'Digital orange': '#FF6A2B', 'Electric blue': '#5CC8FF' };
+const pad = n => String(n).padStart(2, '0');
+const clamp = v => Math.max(0, Math.min(1, v));
+
+class Component extends DCLogic {
+  state = { menu: false, lesson: 0, mod: 0, step: 0, level: 'Iniciante', sent: false };
+  rootRef = React.createRef(); curRef = React.createRef(); galRef = React.createRef(); galWordRef = React.createRef();
+  trackRef = React.createRef(); storyRef = React.createRef(); barRef = React.createRef(); pctRef = React.createRef(); secRef = React.createRef();
+
+  componentDidMount() {
+    this.reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.fine = window.matchMedia('(pointer: fine)').matches;
+    this.mx = this.cx = innerWidth / 2; this.my = this.cy = innerHeight / 2;
+    this.onMove = e => { this.mx = e.clientX; this.my = e.clientY; const t = e.target; this.hot = !!(t && t.closest && t.closest('a,button,[data-hover],input,label,image-slot')); };
+    addEventListener('mousemove', this.onMove, { passive: true });
+    if (!this.fine && this.curRef.current) this.curRef.current.style.display = 'none';
+    this.applyVars();
+    this.setupReveal();
+    this.loop = this.loop.bind(this);
+    this.raf = requestAnimationFrame(this.loop);
+  }
+  componentWillUnmount() { cancelAnimationFrame(this.raf); removeEventListener('mousemove', this.onMove); this.io && this.io.disconnect(); }
+  componentDidUpdate() { this.applyVars(); }
+
+  applyVars() {
+    const r = this.rootRef.current; if (!r) return;
+    const a = this.props.accent || 'Acid lime';
+    r.style.setProperty('--acc', ACC[a] || a);
+    r.style.setProperty('--photo', this.props.photo === 'Color' ? 'none' : 'grayscale(1) contrast(1.05)');
+  }
+  setupReveal() {
+    const r = this.rootRef.current; if (!r || this.reduce || !('IntersectionObserver' in window)) return;
+    this.io = new IntersectionObserver(es => es.forEach(en => {
+      if (!en.isIntersecting) return;
+      const el = en.target; el.style.transitionDelay = (el.dataset.reveal || 0) + 'ms';
+      el.style.opacity = 1; el.style.transform = 'none'; this.io.unobserve(el);
+    }), { threshold: 0.12 });
+    r.querySelectorAll('[data-reveal]').forEach(el => {
+      if (el.getBoundingClientRect().top < innerHeight) return;
+      el.style.opacity = 0; el.style.transform = 'translate3d(0,48px,0)';
+      el.style.transition = 'opacity 1s cubic-bezier(.2,.7,.1,1), transform 1.2s cubic-bezier(.2,.7,.1,1)';
+      this.io.observe(el);
+    });
+  }
+
+  loop(t) {
+    this.raf = requestAnimationFrame(this.loop);
+    const r = this.rootRef.current; if (!r) return;
+    const vh = innerHeight, cqw = innerWidth, m = this.reduce ? 0 : (this.props.motion ?? 1);
+    if (!this.cache || t - this.cacheT > 1000) {
+      this.cacheT = t;
+      this.cache = { sp: [...r.querySelectorAll('[data-speed],[data-xspeed]')], mq: [...r.querySelectorAll('[data-marquee]')], eq: [...r.querySelectorAll('[data-eq]')], cue: [...r.querySelectorAll('[data-cue]')], mag: [...r.querySelectorAll('[data-magnetic]')], sec: [...r.querySelectorAll('[data-sec]')] };
+    }
+    const c = this.cache;
+    // reads
+    const sp = c.sp.map(el => { const b = el.getBoundingClientRect(); return b.top + b.height / 2 - (el._py || 0); });
+    const mag = c.mag.map(el => el.getBoundingClientRect());
+    const g = this.galRef.current, gb = g && g.getBoundingClientRect();
+    const tr = this.trackRef.current, trW = tr ? tr.scrollWidth : 0;
+    const s = this.storyRef.current, sb = s && s.getBoundingClientRect();
+    const docH = document.documentElement.scrollHeight - vh;
+    let secLabel = null; for (const el of c.sec) if (el.getBoundingClientRect().top < vh * 0.5) secLabel = el.dataset.sec;
+    // writes
+    c.sp.forEach((el, i) => {
+      const d = sp[i] - vh / 2;
+      const y = el.dataset.speed ? Math.max(-140, Math.min(140, -d * parseFloat(el.dataset.speed) * m)) : 0;
+      const x = el.dataset.xspeed ? Math.max(-cqw * .3, Math.min(cqw * .3, d * parseFloat(el.dataset.xspeed) * m)) : 0;
+      el._py = y; el.style.transform = `translate3d(${x.toFixed(1)}px,${y.toFixed(1)}px,0)`;
+    });
+    c.mq.forEach(el => { const w = el.scrollWidth / 2; if (!w) return; const x = ((t * 0.04 * (this.reduce ? 0 : 1)) + scrollY * 0.35) % w; el.style.transform = `translate3d(${-x}px,0,0)`; });
+    if (scrollY < vh * 1.2) {
+      c.eq.forEach((el, i) => { const h = this.reduce ? 40 : 12 + 88 * Math.abs(Math.sin(t * 0.005 + i * 0.7) * Math.sin(t * 0.0021 + i * 1.9)); el.style.height = h.toFixed(0) + '%'; });
+      const beat = Math.floor(t / 484) % 4;
+      if (beat !== this.beat) { this.beat = beat; c.cue.forEach((el, i) => { el.style.background = i === beat ? 'var(--acc,#D6FF3D)' : 'transparent'; }); }
+    }
+    c.mag.forEach((el, i) => {
+      const b = mag[i], px = el._mx || 0, py = el._my || 0;
+      const dx = this.mx - (b.left + b.width / 2 - px), dy = this.my - (b.top + b.height / 2 - py);
+      const near = this.fine && m && Math.abs(dx) < b.width / 2 + 40 && Math.abs(dy) < b.height / 2 + 40;
+      const cl = v => Math.max(-12, Math.min(12, v));
+      el._mx = px + ((near ? cl(dx * .2) : 0) - px) * .18; el._my = py + ((near ? cl(dy * .2) : 0) - py) * .18;
+      el.style.transform = `translate3d(${el._mx.toFixed(1)}px,${el._my.toFixed(1)}px,0)`;
+    });
+    if (gb && tr) {
+      const p = clamp(-gb.top / (gb.height - vh));
+      tr.style.transform = `translate3d(${(-p * Math.max(0, trW - cqw)).toFixed(1)}px,0,0)`;
+      if (this.galWordRef.current) this.galWordRef.current.style.transform = `translate3d(${(-p * cqw * 0.9).toFixed(1)}px,0,0)`;
+    }
+    if (sb) {
+      const p = clamp(-sb.top / (sb.height - vh));
+      if (this.barRef.current) this.barRef.current.style.transform = `scaleX(${p.toFixed(4)})`;
+      const st = Math.min(4, Math.floor(p * 5));
+      if (st !== this.state.step) this.setState({ step: st });
+    }
+    if (this.pctRef.current) this.pctRef.current.textContent = String(Math.round(clamp(scrollY / docH) * 100)).padStart(3, '0') + '%';
+    if (this.secRef.current && secLabel && this.secRef.current.textContent !== secLabel) this.secRef.current.textContent = secLabel;
+    const cur = this.curRef.current;
+    if (cur) {
+      this.cx += (this.mx - this.cx) * .22; this.cy += (this.my - this.cy) * .22;
+      cur.style.transform = `translate3d(${(this.cx - 6).toFixed(1)}px,${(this.cy - 6).toFixed(1)}px,0) scale(${this.hot ? 3.4 : 1})`;
+    }
+  }
+
+  go(id) {
+    this.setState({ menu: false });
+    const el = document.getElementById(id); if (!el) return;
+    window.scrollTo({ top: el.getBoundingClientRect().top + scrollY, behavior: this.reduce ? 'auto' : 'smooth' });
+  }
+  link(id) { return e => { e && e.preventDefault(); this.go(id); }; }
+
+  renderVals() {
+    const s = this.state;
+    const L = LESSONS[s.lesson], M = MODULES[s.mod], S = STEPS[s.step];
+    return {
+      rootRef: this.rootRef, curRef: this.curRef, galRef: this.galRef, galWordRef: this.galWordRef, trackRef: this.trackRef,
+      storyRef: this.storyRef, barRef: this.barRef, pctRef: this.pctRef, secRef: this.secRef,
+      menuOpen: s.menu, menuHidden: !s.menu, menuLabel: s.menu ? 'CLOSE' : 'MENU',
+      menuClip: s.menu ? 'inset(0 0 0 0)' : 'inset(0 0 100% 0)', menuTitleY: s.menu ? 'translateY(0%)' : 'translateY(105%)',
+      toggleMenu: () => this.setState(p => ({ menu: !p.menu })),
+      menuLinks: LINKS.map(([label, id], i) => ({ label, n: pad(i + 1), go: this.link(id) })),
+      goTop: e => { e && e.preventDefault(); window.scrollTo({ top: 0, behavior: this.reduce ? 'auto' : 'smooth' }); }, goSobre: this.link('sobre'), goAulas: this.link('aulas'), goContato: this.link('contato'),
+      noop: () => {},
+      eqBars: Array.from({ length: 28 }, (_, i) => i),
+      lessons: LESSONS.map((l, i) => {
+        const on = s.lesson === i;
+        return { ...l, n: pad(i + 1), id: 'lesson-' + (i + 1), enter: () => this.state.lesson !== i && this.setState({ lesson: i }),
+          shift: on ? 'translateX(2.4cqw)' : 'translateX(0)', color: on ? '#111' : '#8A8A86', weight: on ? 800 : 300, stretch: on ? '62%' : '110%',
+          metaOp: on ? 1 : 0, arrow: on ? 'translateX(0)' : 'translateX(-20px)', line: on ? 'scaleX(1)' : 'scaleX(0)',
+          imgOp: on ? 1 : 0, clip: on ? 'inset(0 0 0 0)' : 'inset(100% 0 0 0)' };
+      }),
+      lessonNum: pad(s.lesson + 1), lessonDesc: L.desc,
+      modules: MODULES.map(([title, desc, gear], i) => {
+        const on = s.mod === i;
+        return { title, desc, gear, n: pad(i + 1), id: 'module-' + (i + 1), ph: 'Módulo ' + pad(i + 1) + ' — ' + title.toLowerCase(), open: on,
+          pick: () => this.setState({ mod: i }), rows: on ? '1fr' : '0fr', rot: on ? 'rotate(45deg)' : 'rotate(0)', weight: on ? 800 : 400,
+          tagBg: on ? 'var(--acc,#D6FF3D)' : 'transparent', imgOp: on ? 1 : 0, imgScale: on ? 'scale(1)' : 'scale(1.08)' };
+      }),
+      modNum: pad(s.mod + 1), modGear: M[2], modTitle: M[0],
+      steps: STEPS.map(([word], i) => ({ word, n: pad(i + 1), color: i === s.step ? 'var(--acc,#D6FF3D)' : i < s.step ? '#F7F7F5' : '#7A7A76' })),
+      stepNum: pad(s.step + 1), stepWord: S[0], stepText: S[1],
+      profileOp: [0.45, 0.65, 0.85, 1, 1][s.step], bedroomOp: s.step < 2 ? 1 : 0.18, boothOp: s.step > 2 ? 1 : 0.18,
+      levels: LEVELS.map(label => { const on = s.level === label; return { label, on, bg: on ? 'var(--acc,#D6FF3D)' : 'transparent', pick: () => this.setState({ level: label }) }; }),
+      submit: e => { e.preventDefault(); this.setState({ sent: true }); },
+      sent: s.sent, notSent: !s.sent
+    };
+  }
+}
+</script>
+</body>
+</html>

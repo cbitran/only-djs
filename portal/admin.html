@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f7f7f5">
+  <title>ONLY DJs — Admin</title>
+  <link rel="stylesheet" href="portal.css">
+</head>
+<body>
+  <main class="portal">
+    <header class="topbar">
+      <a class="brand" href="login.html">ONLY<span>DJs</span></a>
+      <a class="mono" id="admin-logout" href="login.html">SAIR ↗</a>
+    </header>
+    <div class="layout frame">
+      <aside class="side">
+        <span class="mono">Controle</span>
+        <nav class="mono">
+          <a href="admin.html">Alunos</a>
+          <a href="#capitulos">Capítulos</a>
+          <a href="#atividade">Atividade</a>
+        </nav>
+      </aside>
+      <section class="content">
+        <div class="eyebrow mono">Área administrativa · acessos</div>
+        <h1>ABRA A<br><em>PRÓXIMA</em> SESSÃO.</h1>
+        <div class="stats">
+          <div class="stat"><span class="mono">Alunos ativos</span><strong id="active-count">—</strong></div>
+          <div class="stat"><span class="mono">Convites pendentes</span><strong id="invite-count">—</strong></div>
+          <div class="stat"><span class="mono">Capítulos publicados</span><strong id="chapter-count">—</strong></div>
+        </div>
+
+        <section class="admin-invite-card">
+          <div class="row">
+            <div><span class="mono">NOVO ACESSO</span><h2>Convidar aluno</h2></div>
+            <span class="mono">E-MAIL + PERMISSÕES</span>
+          </div>
+          <form id="admin-invite-form">
+            <label class="field"><span class="mono">E-MAIL</span><input name="email" type="email" autocomplete="email" required></label>
+            <label class="field"><span class="mono">NOME (OPCIONAL)</span><input name="displayName" autocomplete="name" maxlength="100"></label>
+            <fieldset id="chapter-choices" data-auth-only hidden>
+              <legend class="mono">CAPÍTULOS LIBERADOS NO CONVITE</legend>
+              <span>Carregando…</span>
+            </fieldset>
+            <button class="action mono" type="submit"><span>ENVIAR CONVITE</span><span>→</span></button>
+            <p class="auth-status" id="admin-status" role="status" aria-live="polite">Verificando configuração…</p>
+          </form>
+        </section>
+
+        <section class="admin-roster" id="roster-section" data-auth-only hidden>
+          <div class="row"><div><span class="mono">ACESSOS DA ESCOLA</span><h2>Alunos.</h2></div><span class="mono">STATUS + CAPÍTULOS</span></div>
+          <div id="student-roster" aria-live="polite"><p class="roster-empty">Carregando lista…</p></div>
+        </section>
+        <p class="notice">No modo de prévia, nenhuma alteração é enviada. Conectado, ações administrativas exigem sessão de admin e o backend mantém as credenciais privilegiadas fora do navegador.</p>
+      </section>
+    </div>
+  </main>
+  <script src="supabase-config.js"></script>
+  <script type="module" src="admin.js"></script>
+</body>
+</html>

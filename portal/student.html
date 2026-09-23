@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f7f5">
+  <title>ONLY DJs — Área do aluno</title>
+  <link rel="stylesheet" href="portal.css">
+  <script type="module" src="student.js"></script>
+</head>
+<body class="student-page">
+  <main class="portal student-portal">
+    <header class="topbar student-topbar">
+      <a class="brand" href="login.html" aria-label="ONLY DJs — início"><img class="brand-logo" src="../source/landing-page-only-djs/project/uploads/logo_onlydjayz.png" alt="ONLY DJs"></a>
+      <div class="preview-flag mono" id="student-mode"><span></span> PRÉVIA LOCAL · SALVA NESTE NAVEGADOR</div>
+      <a class="mono logout-link" id="student-logout" href="login.html">SAIR ↗</a>
+    </header>
+
+    <div class="student-shell">
+      <aside class="student-sidebar" id="student-sidebar" aria-label="Navegação da área do aluno">
+        <button class="sidebar-toggle mono" id="sidebar-toggle" type="button" aria-expanded="true" aria-controls="student-sidebar-content" aria-label="Recolher menu">‹</button>
+        <div class="sidebar-body" id="student-sidebar-content">
+        <div class="student-identity">
+          <span class="avatar-picker" aria-hidden="true"><span id="avatar-mark">B</span><img id="avatar-preview" alt="" hidden></span>
+          <a class="student-identity-link" href="profile.html" aria-label="Abrir meu perfil"><span class="mono tiny-label">ALUNO / PRÉVIA</span><strong id="profile-name-display">Bitran</strong></a>
+        </div>
+        <nav class="student-nav mono">
+          <a class="active" href="#visao-geral" aria-label="Visão geral" title="Visão geral"><span class="nav-icon" aria-hidden="true">⌂</span><span class="nav-label">Visão geral</span><span class="nav-number">01</span></a>
+          <a href="#conteudo" aria-label="Conteúdo" title="Conteúdo"><span class="nav-icon" aria-hidden="true">♫</span><span class="nav-label">Conteúdo</span><span class="nav-number">02</span></a>
+          <a href="profile.html" aria-label="Meu perfil" title="Meu perfil"><span class="nav-icon" aria-hidden="true">◎</span><span class="nav-label">Meu perfil</span><span class="nav-number">03</span></a>
+          <a href="profile.html#certificado" aria-label="Certificado" title="Certificado"><span class="nav-icon" aria-hidden="true">↗</span><span class="nav-label">Certificado</span><span class="nav-number">04</span></a>
+        </nav>
+        <div class="sidebar-bottom">
+          <div class="sidebar-label mono">FORMAÇÃO</div>
+          <div class="sidebar-course">DO PRIMEIRO<br><em>PLAY</em> AO BOOTH.</div>
+          <div class="sidebar-hours"><span class="mono">CARGA TOTAL</span><strong>24<span>h</span></strong></div>
+        </div>
+        </div>
+      </aside>
+
+      <section class="student-main" id="visao-geral">
+        <div class="student-heading">
+          <div>
+            <div class="eyebrow mono">SEU ESPAÇO · FORMAÇÃO DE 24 HORAS</div>
+            <h1>SEU PRÓXIMO<br><em>PLAY COMEÇA AQUI.</em></h1>
+          </div>
+          <button class="invite-button mono" id="invite-button" type="button"><span>+</span> CONVIDAR ALGUÉM</button>
+        </div>
+        <p class="student-lede">Aprenda no seu ritmo. Cada aula te aproxima de uma nova forma de ouvir — e de tocar.</p>
+
+        <section class="overview-grid" aria-label="Seu resumo">
+          <article class="overview-card overview-progress">
+            <div class="card-topline mono"><span>SEU PERCURSO</span><span>01 / 10</span></div>
+            <div class="progress-figure"><strong id="progress-count">00<span>%</span></strong><div class="progress-track"><i id="progress-fill"></i></div></div>
+            <p><b id="lesson-seen-count">0 aulas vistas</b><span> de 10 módulos</span></p>
+            <button class="resume-button mono" type="button" data-resume-course>COMEÇAR A TRILHA <span aria-hidden="true">→</span></button>
+          </article>
+          <article class="overview-card overview-points">
+            <div class="card-topline mono"><span>PONTUAÇÃO</span><span>XP</span></div>
+            <strong id="points-count">000</strong>
+            <p>Pontos da prévia <span>· salvos neste navegador</span></p>
+          </article>
+          <article class="overview-card overview-hours">
+            <div class="card-topline mono"><span>CARGA DA FORMAÇÃO</span><span>24H</span></div>
+            <strong>24<span class="hours-minutes"> horas</span></strong>
+            <p>7h40 teoria <span>· 16h20 prática</span></p>
+          </article>
+        </section>
+
+        <section class="course-layout" id="conteudo">
+          <div class="chapter-list-panel">
+            <div class="section-heading">
+              <div><span class="mono tiny-label">CAPÍTULOS</span><h2>10 capítulos.<br><em>Um passo de cada vez.</em></h2></div>
+              <div class="chapter-heading-actions"><span class="mono course-total">24H<br>TEORIA + PRÁTICA</span><button class="chapter-list-toggle mono" id="chapter-list-toggle" type="button" aria-expanded="true" aria-controls="chapter-list" aria-label="Recolher lista de capítulos" title="Recolher lista de capítulos">−</button></div>
+            </div>
+            <div class="chapter-list" id="chapter-list" aria-label="Capítulos do curso"></div>
+          </div>
+
+          <article class="lesson-panel" id="lesson-panel" aria-live="polite">
+            <div class="lesson-loading mono">CARREGANDO SEU CONTEÚDO…</div>
+          </article>
+        </section>
+
+        <footer class="student-footer mono"><span>ONLY DJs · ÁREA DO ALUNO</span><span id="student-footer-note">PRÉVIA LOCAL — DADOS SALVOS SÓ NESTE NAVEGADOR</span></footer>
+      </section>
+    </div>
+    <div class="toast mono" id="preview-toast" role="status" aria-live="polite"></div>
+  </main>
+  <script src="supabase-config.js"></script>
+  <dialog class="invite-dialog" id="invite-dialog">
+    <form id="invite-form" method="dialog">
+      <span class="mono tiny-label">COMPARTILHE A ESCOLA</span>
+      <h2>Chame alguém<br>pra cabine.</h2>
+      <label for="invite-link">LINK DO CONVITE PÚBLICO</label>
+      <div class="invite-link-row"><input id="invite-link" type="url" readonly aria-label="Link público da ONLY DJs"><button class="invite-copy mono" id="invite-copy" type="button">COPIAR</button></div>
+      <p>Esse endereço leva à página pública. Não cria conta nem libera acesso às aulas; a escola precisa liberar o acesso do convidado.</p>
+      <div class="invite-actions"><button class="invite-cancel" type="button" id="invite-cancel">FECHAR</button><button class="invite-submit" id="invite-share" type="button">COMPARTILHAR ↗</button></div>
+    </form>
+  </dialog>
+</body>
+</html>

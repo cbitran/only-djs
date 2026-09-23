@@ -1,3 +1,3 @@
-# Only DJs
+# Only DJs — prévia pública
 
-Prévia pública estática da plataforma de aprendizado Only DJs. A área de membros depende do projeto dedicado Only DJs no Supabase.
+Prévia visual em validação. O portal conecta ao projeto Supabase Only DJs, mas não há contas ou capítulos publicados ainda. Formulários de interesse, agenda e pagamentos permanecem desativados.
