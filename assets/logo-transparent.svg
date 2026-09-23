@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="1250 1400 2500 2250" role="img" aria-label="ONLY DJAYZ">
+  <defs>
+    <filter id="transparent-dark-background" color-interpolation-filters="sRGB" x="0" y="0" width="100%" height="100%">
+      <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  .2126 .7152 .0722 0 0" result="luminance-mask"/>
+      <feComponentTransfer in="luminance-mask" result="mark-mask">
+        <feFuncA type="discrete" tableValues="0 1"/>
+      </feComponentTransfer>
+      <feFlood flood-color="#111111" result="ink"/>
+      <feComposite in="ink" in2="mark-mask" operator="in"/>
+    </filter>
+  </defs>
+  <image href="logo.png" x="0" y="0" width="5000" height="5000" filter="url(#transparent-dark-background)"/>
+</svg>
