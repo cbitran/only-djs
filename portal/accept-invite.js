@@ -1,11 +1,12 @@
 import { supabase, supabaseConfigured } from "./supabase-client.js";
-import { completeAccessSetup } from "./invite-activation.js";
+import { completeAccessSetup, verifyInviteToken } from "./invite-activation.js";
 
 const form = document.querySelector("#password-form");
 const status = document.querySelector("#password-status");
 const button = form.querySelector("button[type=submit]");
 const retryButton = document.querySelector("#retry-activation");
-const isRecovery = new URLSearchParams(location.search).get("flow") === "recovery";
+const searchParams = new URLSearchParams(location.search);
+const isRecovery = searchParams.get("flow") === "recovery";
 document.querySelector("#flow-label").textContent = isRecovery ? "RECUPERAÇÃO DE ACESSO" : "CONVITE À ESCOLA";
 
 function announce(message, error = false) {
@@ -15,10 +16,19 @@ function announce(message, error = false) {
 
 let hasSession = false;
 let sessionUserId = "";
+let inviteStatus = "not-invite";
 if (supabaseConfigured && supabase) {
+  inviteStatus = await verifyInviteToken(searchParams, (payload) => supabase.auth.verifyOtp(payload));
+  if (inviteStatus === "verified" || inviteStatus === "invalid") {
+    searchParams.delete("token_hash");
+    searchParams.delete("type");
+    const remainingQuery = searchParams.toString();
+    history.replaceState(null, "", `${location.pathname}${remainingQuery ? `?${remainingQuery}` : ""}${location.hash}`);
+  }
   const { data } = await supabase.auth.getSession();
   hasSession = Boolean(data.session);
   sessionUserId = data.session?.user?.id || "";
+  if (inviteStatus === "invalid") announce("Este convite expirou ou já foi usado. Peça um novo convite.", true);
 }
 const activationPendingKey = sessionUserId ? `only-djs-invite-activation:${sessionUserId}` : "";
 function rememberPendingActivation(pending) {
@@ -35,6 +45,7 @@ function hasRememberedPendingActivation() {
 }
 if (!supabaseConfigured) announce("O acesso ainda não está conectado a uma base Only DJs.", true);
 else if (!supabase) announce("Configuração bloqueada: confira se a referência e a URL são do mesmo projeto Supabase.", true);
+else if (inviteStatus === "invalid") announce("Este convite expirou ou já foi usado. Peça um novo convite.", true);
 else if (!hasSession) announce("Link inválido ou expirado. Peça à escola um novo convite.", true);
 else if (!isRecovery && hasRememberedPendingActivation()) {
   retryButton.hidden = false;
