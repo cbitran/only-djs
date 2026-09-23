@@ -1,5 +1,5 @@
 import { supabase, supabaseConfigured } from "./supabase-client.js";
-import { activatePendingInvite, completeAccessSetup } from "./invite-activation.js";
+import { completeAccessSetup } from "./invite-activation.js";
 
 const form = document.querySelector("#password-form");
 const status = document.querySelector("#password-status");
@@ -53,6 +53,11 @@ form.addEventListener("submit", async (event) => {
     isRecovery,
     updatePassword: () => supabase.auth.updateUser({ password }),
     invokeActivation: () => supabase.functions.invoke("activate-invited-student"),
+    checkIsAdmin: async () => {
+      const { data, error } = await supabase.rpc("is_current_user_admin");
+      if (error) throw error;
+      return data === true;
+    },
   });
   if (result === "password-error") {
     button.disabled = false;
@@ -61,6 +66,10 @@ form.addEventListener("submit", async (event) => {
 
   if (result === "recovery-saved") {
     location.replace("login.html?password_updated=1");
+    return;
+  }
+  if (result === "admin-saved") {
+    location.replace("admin.html");
     return;
   }
   if (result === "activation-pending") {
@@ -77,10 +86,21 @@ retryButton.addEventListener("click", async () => {
   if (!supabase || !hasSession || isRecovery) return announce("Abra o convite recebido por e-mail para continuar.", true);
   retryButton.disabled = true;
   announce("Tentando concluir a ativação…");
-  const activated = await activatePendingInvite(
-    () => supabase.functions.invoke("activate-invited-student"),
-  );
-  if (!activated) {
+  const result = await completeAccessSetup({
+    isRecovery: false,
+    updatePassword: async () => ({ error: null }),
+    checkIsAdmin: async () => {
+      const { data, error } = await supabase.rpc("is_current_user_admin");
+      if (error) throw error;
+      return data === true;
+    },
+    invokeActivation: () => supabase.functions.invoke("activate-invited-student"),
+  });
+  if (result === "admin-saved") {
+    location.replace("admin.html");
+    return;
+  }
+  if (result !== "activated") {
     retryButton.disabled = false;
     return announce("Ainda não foi possível ativar. Você pode tentar novamente; sua senha já está salva.", true);
   }
